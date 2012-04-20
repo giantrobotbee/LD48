@@ -1,0 +1,24 @@
+package
+{
+	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
+	
+	import starling.core.Starling;
+	
+	public class Main extends Sprite
+	{
+		private var starling:Starling;
+		
+		[SWF(width="1280", height="752", frameRate="60", backgroundColor="#002143")]
+		public function Main()
+		{
+			addChild( new Stats() );
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.align = StageAlign.TOP_LEFT;
+			
+			mStarling = new Starling(Game, stage);
+			mStarling.start();
+		}
+	}
+}

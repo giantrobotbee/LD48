@@ -1,0 +1,13 @@
+package com.giantrobotbee.LD4823
+{
+	import starling.display.Sprite;
+	import starling.display.Quad;
+	import starling.events.Event;
+	
+	public class Game extends Sprite
+	{
+		public function Game()
+		{
+		}
+	}
+}

@@ -1,0 +1,15 @@
+package
+{
+	import flash.display.Sprite;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
+	
+	public class Main extends Sprite
+	{
+		[SWF(width="1280", height="752", frameRate="60", backgroundColor="#002143")]
+		public function Main()
+		{
+			
+		}
+	}
+}

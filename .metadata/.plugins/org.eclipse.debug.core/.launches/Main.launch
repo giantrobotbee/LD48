@@ -2,7 +2,7 @@
 <launchConfiguration type="com.adobe.flexbuilder.debug.launchConfigurationType.flash">
 <stringAttribute key="com.adobe.flexbuilder.debug.ATTR_APPLICATION" value="src/com/giantrobotbee/LD4823/Main.as"/>
 <stringAttribute key="com.adobe.flexbuilder.debug.ATTR_PROJECT" value="LD48-23"/>
-<stringAttribute key="com.adobe.flexbuilder.debug.ATTR_RUN_URL" value="file:/Users/drmanitoba/Games/LD48/LD48-23/bin-debug/Main.html"/>
+<stringAttribute key="com.adobe.flexbuilder.debug.ATTR_RUN_URL" value="file:/Users/drmanitoba/Games/LD48/LD48-23/bin-debug/Main.swf"/>
 <booleanAttribute key="com.adobe.flexbuilder.debug.ATTR_USE_DEFAULT_URLS" value="true"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/LD48-23"/>

@@ -98,3 +98,9 @@ Binding(COMMAND+SHIFT+G,
 
 !ENTRY org.eclipse.core.jobs 4 1 2012-04-20 18:45:06.085
 !MESSAGE Worker thread ended job: Launching Main(843), but still holds rule: ThreadJob(Launching Main(843),[com.adobe.flexide.launching.FlexLaunchSchedulingRule@2decc2,])
+
+!ENTRY org.eclipse.core.jobs 4 1 2012-04-20 18:58:24.862
+!MESSAGE Worker thread ended job: Launching Main(1316), but still holds rule: ThreadJob(Launching Main(1316),[com.adobe.flexide.launching.FlexLaunchSchedulingRule@103b6e9,])
+
+!ENTRY org.eclipse.core.jobs 4 1 2012-04-20 18:58:52.651
+!MESSAGE Worker thread ended job: Launching Main(1341), but still holds rule: ThreadJob(Launching Main(1341),[com.adobe.flexide.launching.FlexLaunchSchedulingRule@1aea545,])

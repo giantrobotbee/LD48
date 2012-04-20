@@ -13,7 +13,7 @@ package com.giantrobotbee.LD4823
 		
 		public function Main()
 		{
-			addChild(new Stats());
+			addChild( new Stats() );
 			
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;

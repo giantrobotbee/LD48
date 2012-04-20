@@ -19,7 +19,7 @@ package com.giantrobotbee.LD4823
 		
 		private function initGame():void
 		{
-			maxSpeed = 10;
+			maxSpeed = 5;
 		}
 		
 		private function onAdded(e:Event):void
@@ -31,15 +31,15 @@ package com.giantrobotbee.LD4823
 			q.setVertexColor(3, 0x0000FF);
 			addChild(q);
 			
+			q.x = stage.stageWidth - (q.width / 2);
+			q.y = stage.stageHeight - q.height / 2;
 			q.pivotX = q.width >> 1;
 			q.pivotY = q.height >> 1;
-			q.x = (stage.stageWidth - q.width >> 1) + (q.width >> 1);
-			q.y = (stage.stageHeight - q.height >> 1) + (q.height >> 1);
 		}
 		
 		private function onEnterFrame(e:Event):void
 		{
-			q.rotation += deg2rad(maxSpeed) * -1;
+//			q.rotation += deg2rad(maxSpeed);
 		}
 	}
 }

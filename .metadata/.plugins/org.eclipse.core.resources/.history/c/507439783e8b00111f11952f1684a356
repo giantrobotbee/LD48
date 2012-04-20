@@ -10,13 +10,10 @@ package com.giantrobotbee.LD4823
 	public class Main extends Sprite
 	{
 		private var mStarling:Starling;
-		private var debug:Boolean = true;
 		
 		public function Main()
 		{
-			if (debug == true) {
-				addChild(new Stats());
-			}
+			addChild(new Stats());
 			
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;

@@ -19,7 +19,7 @@ package com.giantrobotbee.LD4823
 		
 		private function initGame():void
 		{
-			maxSpeed = 10;
+			maxSpeed = 5;
 		}
 		
 		private function onAdded(e:Event):void
@@ -39,7 +39,7 @@ package com.giantrobotbee.LD4823
 		
 		private function onEnterFrame(e:Event):void
 		{
-			q.rotation += deg2rad(maxSpeed) * -1;
+			q.rotation += deg2rad(maxSpeed);
 		}
 	}
 }

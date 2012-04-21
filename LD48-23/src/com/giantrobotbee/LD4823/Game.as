@@ -1,7 +1,7 @@
 package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.stategies.LevelStrategy;
-
+	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
@@ -27,6 +27,7 @@ package com.giantrobotbee.LD4823
 		private var dPressed:Boolean = false;
 		private var accelRate:Number = 0.1;
 		private var decelRate:Number = 0.05;
+		private const levels:Levels = new Levels();
 		
 		public function Game()
 		{
@@ -38,7 +39,6 @@ package com.giantrobotbee.LD4823
 		private function initGame():void
 		{
 			player = new Player();
-
 			levels.addLevelStrategy( new LevelStrategy( new Level() ) );
 		}
 
@@ -88,17 +88,17 @@ package com.giantrobotbee.LD4823
 			player.vx = (Math.cos(player.rotation) * player.accel) * -1;
 			player.vy = (Math.sin(player.rotation) * player.accel) * -1;
 			
-//			if ( player.x + (player.width >> 1) < 0 ) {
-//				player.x = stage.stageWidth + (player.width >> 1);
-//			} else if ( player.x - (player.width >> 1) > stage.stageWidth ) {
-//				player.x = 0;
-//			}
-//			
-//			if ( player.y + (player.height >> 1) < 0 ) {
-//				player.y = stage.stageHeight + (player.height >> 1);
-//			} else if ( player.y - (player.height >> 1) > stage.stageHeight) {
-//				player.y = 0;
-//			}
+			if ( player.x + (player.width >> 1) < 0 ) {
+				player.x = stage.stageWidth + (player.width >> 1);
+			} else if ( player.x - (player.width >> 1) > stage.stageWidth ) {
+				player.x = 0;
+			}
+			
+			if ( player.y + (player.height >> 1) < 0 ) {
+				player.y = stage.stageHeight + (player.height >> 1);
+			} else if ( player.y - (player.height >> 1) > stage.stageHeight) {
+				player.y = 0;
+			}
 			
 			player.x += player.vx;
 			player.y += player.vy;

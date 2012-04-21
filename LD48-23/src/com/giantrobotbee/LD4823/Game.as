@@ -40,7 +40,6 @@ package com.giantrobotbee.LD4823
 		private function initGame():void
 		{
 			player = new Player();
-
 			levels.addLevelStrategy( new LevelStrategy( new Level() ) );
 		}
 

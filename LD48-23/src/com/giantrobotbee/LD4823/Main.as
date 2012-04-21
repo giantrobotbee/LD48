@@ -11,7 +11,6 @@ package com.giantrobotbee.LD4823
 	{
 		private var mStarling:Starling;
 		private var debug:Boolean = true;
-		private var test:Boolean = true;
 
 		public function Main()
 		{

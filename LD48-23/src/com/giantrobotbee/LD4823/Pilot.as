@@ -2,7 +2,7 @@ package com.giantrobotbee.LD4823
 {
 	import starling.display.Image;
 	import starling.display.Sprite;
-
+	
 	public class Pilot extends Sprite
 	{
 		private var _image:Image;

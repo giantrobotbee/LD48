@@ -2,7 +2,7 @@ package com.giantrobotbee.LD4823
 {
 	import starling.display.Image;
 	import starling.display.Sprite;
-
+	
 	public class Thruster extends Sprite
 	{
 		private var _topSpeed:Number = 10;

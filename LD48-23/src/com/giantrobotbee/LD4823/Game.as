@@ -58,27 +58,27 @@ package com.giantrobotbee.LD4823
 			var localp:Point = new Point(player.gun.gunBody.x, player.gun.gunBody.y);
 			var p:Point = player.localToGlobal(localp);
 			
-			if(wPressed) {
-				if(player.accel < player.thruster.topSpeed) {
+			if ( wPressed ) {
+				if ( player.accel < player.thruster.topSpeed ) {
 					player.accel += accelRate;
 				} else {
 					player.accel = player.thruster.topSpeed;
 				}
 			}
 			
-			if(aPressed) {
+			if ( aPressed ) {
 				player.rotation -= player.rotSpeed;
 			}
 			
-			if(sPressed) {
-				if(player.accel > 0) {
+			if ( sPressed ) {
+				if ( player.accel > 0 ) {
 					player.accel -= decelRate;
 				} else {
 					player.accel = 0;
 				}
 			}
 			
-			if(dPressed) {
+			if ( dPressed ) {
 				player.rotation += player.rotSpeed;
 			}
 			
@@ -90,6 +90,19 @@ package com.giantrobotbee.LD4823
 			
 			player.vx = (Math.cos(player.rotation) * player.accel) * -1;
 			player.vy = (Math.sin(player.rotation) * player.accel) * -1;
+			
+			if ( player.x + (player.width >> 1) < 0 ) {
+				player.x = stage.stageWidth + (player.width >> 1);
+			} else if ( player.x - (player.width >> 1) > stage.stageWidth ) {
+				player.x = 0;
+			}
+			
+			if ( player.y + (player.height >> 1) < 0 ) {
+				player.y = stage.stageHeight + (player.height >> 1);
+			} else if ( player.y - (player.height >> 1) > stage.stageHeight) {
+				player.y = 0;
+			}
+			
 			player.x += player.vx;
 			player.y += player.vy;
 		}

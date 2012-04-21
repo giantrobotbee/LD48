@@ -3,10 +3,12 @@ package com.giantrobotbee.LD4823
 	import com.giantrobotbee.LD4823.stategies.LevelStrategy;
 
 	import flash.events.MouseEvent;
-
+	import flash.ui.Keyboard;
+	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.KeyboardEvent;
 	import starling.utils.deg2rad;
 
 	public class Game extends Sprite

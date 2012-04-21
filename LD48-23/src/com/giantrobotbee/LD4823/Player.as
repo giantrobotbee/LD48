@@ -11,7 +11,7 @@ package com.giantrobotbee.LD4823
 		private var _gun:Gun;
 		private var _vx:Number = 0;
 		private var _vy:Number = 0;
-		private var _rotSpeed:Number = 0.1;
+		private var _rotSpeed:Number = 0.05;
 		private var _accel:Number = 0;
 		
 		public function Player()

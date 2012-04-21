@@ -8,7 +8,7 @@ package com.giantrobotbee.LD4823
 		[Embed(source="res/player-thruster-basic.png")]
 		private static const ThrusterImage:Class;
 		
-		private var _topSpeed:Number = 20;
+		private var _topSpeed:Number = 10;
 		private var _image:Image;
 		
 		public function Thruster()

@@ -9,6 +9,10 @@ package com.giantrobotbee.LD4823
 		private var _thruster:Thruster;
 		private var _pilot:Pilot;
 		private var _gun:Gun;
+		private var _vx:Number = 0;
+		private var _vy:Number = 0;
+		private var _rotSpeed:Number = 0.1;
+		private var _accel:Number = 0;
 		
 		public function Player()
 		{
@@ -25,6 +29,9 @@ package com.giantrobotbee.LD4823
 			
 			gun.x = 19;
 			gun.y = 82;
+			
+			this.pivotX = planet.width >> 1;
+			this.pivotY = planet.height >> 1;
 			
 			addChild(planet);			
 			addChild(thruster);
@@ -70,6 +77,47 @@ package com.giantrobotbee.LD4823
 		public function set gun(g:Gun):void 
 		{
 			_gun = g;
+		}
+		
+		public function get vx():Number 
+		{
+			return _vx;
+		}
+		
+		public function set vx(vx:Number):void 
+		{
+			_vx = vx;
+		}
+		
+		public function get vy():Number 
+		{
+			return _vy;
+		}
+		
+		public function set vy(vy:Number):void 
+		{
+			_vy = vy;
+		}
+		
+		
+		public function get rotSpeed():Number 
+		{
+			return _rotSpeed;
+		}
+		
+		public function set rotSpeed(s:Number):void 
+		{
+			_rotSpeed = s;
+		}
+		
+		public function get accel():Number 
+		{
+			return _accel;
+		}
+		
+		public function set accel(a:Number):void 
+		{
+			_accel = a;
 		}
 	}
 }

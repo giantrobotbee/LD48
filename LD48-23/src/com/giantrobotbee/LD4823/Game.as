@@ -24,7 +24,7 @@ package com.giantrobotbee.LD4823
 		private var sPressed:Boolean = false;
 		private var dPressed:Boolean = false;
 		private var accelRate:Number = 0.1;
-		private var decelRate:Number = 0.1;
+		private var decelRate:Number = 0.05;
 		
 		public function Game()
 		{
@@ -51,9 +51,6 @@ package com.giantrobotbee.LD4823
 		
 		private function onEnterFrame(e:Event):void
 		{
-			var localp:Point = new Point(player.gun.gunBody.x, player.gun.gunBody.y);
-			var p:Point = player.localToGlobal(localp);
-			
 			if ( wPressed ) {
 				if ( player.accel < player.thruster.topSpeed ) {
 					player.accel += accelRate;
@@ -64,6 +61,8 @@ package com.giantrobotbee.LD4823
 			
 			if ( aPressed ) {
 				player.rotation -= player.rotSpeed;
+			} else if ( dPressed ) {
+				player.rotation += player.rotSpeed;
 			}
 			
 			if ( sPressed ) {
@@ -74,14 +73,12 @@ package com.giantrobotbee.LD4823
 				}
 			}
 			
-			if ( dPressed ) {
-				player.rotation += player.rotSpeed;
-			}
-			
+			var localp:Point = new Point(player.gun.x, player.gun.y);
+			var p:Point = player.localToGlobal(localp);
 			var mdx:Number = p.x - mouseX;
 			var mdy:Number = p.y - mouseY;
 			
-			var angle:Number = Math.atan2(mdy, mdx);
+			var angle:Number = Math.atan2(mdy, mdx) - player.rotation;
 			player.gun.gunBody.rotation = angle;
 			
 			player.vx = (Math.cos(player.rotation) * player.accel) * -1;

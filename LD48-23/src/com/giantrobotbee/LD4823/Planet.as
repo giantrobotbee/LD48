@@ -6,13 +6,13 @@ package com.giantrobotbee.LD4823
 	public class Planet extends Sprite
 	{
 		[Embed(source="res/player-planet-blue.png")]
-		private static const Planet:Class;
+		private static const PlanetImage:Class;
 		
 		private var _pimage:Image;
 		
 		public function Planet()
 		{
-			pimage = Image.fromBitmap(new Planet());
+			pimage = Image.fromBitmap(new PlanetImage());
 			addChild(pimage);
 		}
 		

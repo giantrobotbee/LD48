@@ -20,6 +20,12 @@ package com.giantrobotbee.LD4823
 		[Embed(source="res/player-pilot-default.png")]
 		protected static const Pilot:Class;
 
+		[Embed(source="res/player-gun-basic-body.png")]
+		private static const GunBody:Class;
+
+		[Embed(source="res/player-gun-basic-anchor.png")]
+		private static const GunAnchor:Class;
+
 		protected static const textureCache:Dictionary = new Dictionary();
 		protected static const imageCache:Dictionary = new Dictionary();
 

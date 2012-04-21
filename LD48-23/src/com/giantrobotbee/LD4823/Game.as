@@ -6,7 +6,7 @@ package com.giantrobotbee.LD4823
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
-	
+
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -15,7 +15,7 @@ package com.giantrobotbee.LD4823
 	import starling.events.TouchEvent;
 	import starling.utils.deg2rad;
 	import starling.utils.rad2deg;
-	
+
 	public class Game extends Sprite
 	{
 		private var player:Player;
@@ -27,7 +27,9 @@ package com.giantrobotbee.LD4823
 		private var dPressed:Boolean = false;
 		private var accelRate:Number = 0.1;
 		private var decelRate:Number = 0.05;
-		
+
+		protected const levels:Levels = new Levels();
+
 		public function Game()
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAdded);
@@ -46,7 +48,7 @@ package com.giantrobotbee.LD4823
 		{
 			player.x = stage.stageWidth - player.width >> 1;
 			player.y = stage.stageHeight - player.height >> 1;
-			
+
 			stage.addEventListener(TouchEvent.TOUCH, onTouch);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
@@ -62,13 +64,13 @@ package com.giantrobotbee.LD4823
 					player.accel = player.thruster.topSpeed;
 				}
 			}
-			
+
 			if ( aPressed ) {
 				player.rotation -= player.rotSpeed;
 			} else if ( dPressed ) {
 				player.rotation += player.rotSpeed;
 			}
-			
+
 			if ( sPressed ) {
 				if ( player.accel > 0 ) {
 					player.accel -= decelRate;
@@ -76,43 +78,43 @@ package com.giantrobotbee.LD4823
 					player.accel = 0;
 				}
 			}
-			
+
 			var localp:Point = new Point(player.gun.x, player.gun.y);
 			var p:Point = player.localToGlobal(localp);
 			var mdx:Number = p.x - mouseX;
 			var mdy:Number = p.y - mouseY;
-			
+
 			var angle:Number = Math.atan2(mdy, mdx) - player.rotation;
 			player.gun.gunBody.rotation = angle;
-			
+
 			player.vx = (Math.cos(player.rotation) * player.accel) * -1;
 			player.vy = (Math.sin(player.rotation) * player.accel) * -1;
-			
+
 //			if ( player.x + (player.width >> 1) < 0 ) {
 //				player.x = stage.stageWidth + (player.width >> 1);
 //			} else if ( player.x - (player.width >> 1) > stage.stageWidth ) {
 //				player.x = 0;
 //			}
-//			
+//
 //			if ( player.y + (player.height >> 1) < 0 ) {
 //				player.y = stage.stageHeight + (player.height >> 1);
 //			} else if ( player.y - (player.height >> 1) > stage.stageHeight) {
 //				player.y = 0;
 //			}
-			
+
 			player.x += player.vx;
 			player.y += player.vy;
 		}
-		
+
 		private function onTouch(e:TouchEvent):void
 		{
 			var touch:Touch = e.getTouch(stage);
 			var pos:Point = touch.getLocation(stage);
-			
+
 			mouseX = pos.x;
 			mouseY = pos.y;
 		}
-		
+
 		private function onKeyDown(e:KeyboardEvent):void
 		{
 			switch(e.keyCode) {
@@ -130,7 +132,7 @@ package com.giantrobotbee.LD4823
 					break;
 			}
 		}
-		
+
 		private function onKeyUp(e:KeyboardEvent):void
 		{
 			switch(e.keyCode) {

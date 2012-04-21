@@ -2,28 +2,25 @@ package com.giantrobotbee.LD4823
 {
 	import starling.display.Image;
 	import starling.display.Sprite;
-	
+
 	public class Pilot extends Sprite
 	{
-		[Embed(source="res/player-pilot-default.png")]
-		private static const PilotImage:Class;
-		
 		private var _image:Image;
-		
+
 		public function Pilot()
 		{
-			image = Image.fromBitmap(new PilotImage());
+			image = Assets.retrieveImage( 'Pilot' );
 			addChild(image);
 		}
-		
-		public function get image():Image 
+
+		public function get image():Image
 		{
 			return _image;
 		}
-		
-		public function set image(i:Image):void 
+
+		public function set image(value:Image):void
 		{
-			_image = i;
+			_image = value;
 		}
 	}
 }

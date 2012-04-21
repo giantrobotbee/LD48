@@ -21,6 +21,12 @@ package com.giantrobotbee.LD4823
 		private var player:Player;
 		private var mouseX:Number = 0;
 		private var mouseY:Number = 0;
+		private var wPressed:Boolean = false;
+		private var aPressed:Boolean = false;
+		private var sPressed:Boolean = false;
+		private var dPressed:Boolean = false;
+		private var accelRate:Number = 0.1;
+		private var decelRate:Number = 0.1;
 		
 		public function Game()
 		{
@@ -42,6 +48,8 @@ package com.giantrobotbee.LD4823
 			player.y = stage.stageHeight - player.height >> 1;
 			
 			stage.addEventListener(TouchEvent.TOUCH, onTouch);
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 			addChild(player);
 		}
 
@@ -50,13 +58,40 @@ package com.giantrobotbee.LD4823
 			var localp:Point = new Point(player.gun.gunBody.x, player.gun.gunBody.y);
 			var p:Point = player.localToGlobal(localp);
 			
-			trace("gunX: ", p.x , " gunY: ", p.y);
+			if(wPressed) {
+				if(player.accel < player.thruster.topSpeed) {
+					player.accel += accelRate;
+				} else {
+					player.accel = player.thruster.topSpeed;
+				}
+			}
+			
+			if(aPressed) {
+				player.rotation -= player.rotSpeed;
+			}
+			
+			if(sPressed) {
+				if(player.accel > 0) {
+					player.accel -= decelRate;
+				} else {
+					player.accel = 0;
+				}
+			}
+			
+			if(dPressed) {
+				player.rotation += player.rotSpeed;
+			}
 			
 			var mdx:Number = p.x - mouseX;
 			var mdy:Number = p.y - mouseY;
 			
 			var angle:Number = Math.atan2(mdy, mdx);
 			player.gun.gunBody.rotation = angle;
+			
+			player.vx = (Math.cos(player.rotation) * player.accel) * -1;
+			player.vy = (Math.sin(player.rotation) * player.accel) * -1;
+			player.x += player.vx;
+			player.y += player.vy;
 		}
 		
 		private function onTouch(e:TouchEvent):void
@@ -66,6 +101,42 @@ package com.giantrobotbee.LD4823
 			
 			mouseX = pos.x;
 			mouseY = pos.y;
+		}
+		
+		private function onKeyDown(e:KeyboardEvent):void
+		{
+			switch(e.keyCode) {
+				case Keyboard.W:
+					wPressed = true;
+					break;
+				case Keyboard.A:
+					aPressed = true;
+					break;
+				case Keyboard.S:
+					sPressed = true;
+					break;
+				case Keyboard.D:
+					dPressed = true;
+					break;
+			}
+		}
+		
+		private function onKeyUp(e:KeyboardEvent):void
+		{
+			switch(e.keyCode) {
+				case Keyboard.W:
+					wPressed = false;
+					break;
+				case Keyboard.A:
+					aPressed = false;
+					break;
+				case Keyboard.S:
+					sPressed = false;
+					break;
+				case Keyboard.D:
+					dPressed = false;
+					break;
+			}
 		}
 	}
 }

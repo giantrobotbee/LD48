@@ -8,22 +8,22 @@ package com.giantrobotbee.LD4823
 		[Embed(source="res/player-planet-blue.png")]
 		private static const PlanetImage:Class;
 		
-		private var _pimage:Image;
+		private var _image:Image;
 		
 		public function Planet()
 		{
-			pimage = Image.fromBitmap(new PlanetImage());
-			addChild(pimage);
+			image = Image.fromBitmap(new PlanetImage());
+			addChild(image);
 		}
 		
-		public function get pimage():Image 
+		public function get image():Image 
 		{
-			return _pimage;
+			return _image;
 		}
 		
-		public function set pimage(pi:Image):void 
+		public function set image(pi:Image):void 
 		{
-			_pimage = pi;
+			_image = pi;
 		}
 	}
 }

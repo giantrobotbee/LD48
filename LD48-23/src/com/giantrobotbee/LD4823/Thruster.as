@@ -8,23 +8,23 @@ package com.giantrobotbee.LD4823
 		[Embed(source="res/player-thruster-basic.png")]
 		private static const ThrusterImage:Class;
 		
-		private var _timage:Image;
+		private var _image:Image;
 		
 		public function Thruster()
 		{
-			timage = Image.fromBitmap(new ThrusterImage());
-			addChild(timage);
+			image = Image.fromBitmap(new ThrusterImage());
+			addChild(image);
 		}
 		
-		public function get timage():Image 
+		public function get image():Image 
 		{
 			
-			return _timage;
+			return _image;
 		}
 		
-		public function set timage(ti:Image):void 
+		public function set image(ti:Image):void 
 		{
-			_timage = ti;
+			_image = ti;
 		}
 	}
 }

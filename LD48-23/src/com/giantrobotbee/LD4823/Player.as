@@ -5,18 +5,15 @@ package com.giantrobotbee.LD4823
 	
 	public class Player extends Sprite
 	{	
-		[Embed(source="res/player-pilot-default.png")]
-		private static const Pilot:Class;
-		
 		private var planet:Planet;
 		private var thruster:Thruster;
-		private var pilot:Image;
+		private var pilot:Pilot;
 		
 		public function Player()
 		{
 			planet = new Planet();
 			thruster = new Thruster();
-			pilot = Image.fromBitmap(new Pilot());
+			pilot = new Pilot();
 			
 			thruster.x = (planet.width >> 1) - 10;
 			thruster.y = -13;

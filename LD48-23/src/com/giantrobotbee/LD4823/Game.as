@@ -1,5 +1,7 @@
 package com.giantrobotbee.LD4823
 {
+	import flash.events.MouseEvent;
+	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -7,8 +9,7 @@ package com.giantrobotbee.LD4823
 	
 	public class Game extends Sprite
 	{
-		private var q:Quad;
-		private var maxSpeed:Number;
+		private var player:Player;
 		
 		public function Game()
 		{
@@ -19,27 +20,18 @@ package com.giantrobotbee.LD4823
 		
 		private function initGame():void
 		{
-			maxSpeed = 10;
+			player = new Player();
 		}
 		
 		private function onAdded(e:Event):void
 		{
-			q = new Quad(200, 200);
-			q.setVertexColor(0, 0x000000);
-			q.setVertexColor(1, 0xAA0000);
-			q.setVertexColor(2, 0x00FF00);
-			q.setVertexColor(3, 0x0000FF);
-			addChild(q);
-			
-			q.pivotX = q.width >> 1;
-			q.pivotY = q.height >> 1;
-			q.x = (stage.stageWidth - q.width >> 1) + (q.width >> 1);
-			q.y = (stage.stageHeight - q.height >> 1) + (q.height >> 1);
+			player.x = stage.stageWidth - player.width >> 1;
+			player.y = stage.stageHeight - player.height >> 1;
+			addChild(player);
 		}
 		
 		private function onEnterFrame(e:Event):void
 		{
-			q.rotation += deg2rad(maxSpeed) * -1;
 		}
 	}
 }

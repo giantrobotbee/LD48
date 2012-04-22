@@ -17,14 +17,14 @@ package com.giantrobotbee.LD4823
 
 		public function retrieve( type:String ):Sprite
 		{
-			var toFind:Class = type ? getDefinitionByName( getQualifiedClassName( type ) ) : defaultClass;
-			var toReturn:toFind;
+			var toFind:Class = type ? getDefinitionByName( getQualifiedClassName( type ) ) as Class : defaultClass;
+			var toReturn:Sprite;
 
-			for ( var i = 0, l = array.length; i < l; i++ )
+			for ( var i:int = 0, l:int = array.length; i < l; i++ )
 			{
 				if ( array[i] is toFind )
 				{
-					toReturn = array.splice(i,1)[0] as toFind;
+					toReturn = array.splice(i,1)[0] as Sprite;
 					break;
 				}
 			}

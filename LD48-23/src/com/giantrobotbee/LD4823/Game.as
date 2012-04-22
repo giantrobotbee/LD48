@@ -1,8 +1,7 @@
 package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.stategies.LevelStrategy;
-
-	import flash.events.MouseEvent;
+	
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
@@ -13,6 +12,7 @@ package com.giantrobotbee.LD4823
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	import starling.utils.deg2rad;
 	import starling.utils.rad2deg;
 
@@ -45,7 +45,6 @@ package com.giantrobotbee.LD4823
 		private function initGame():void
 		{
 			player = new Player();
-
 			levels.addLevelStrategy( new LevelStrategy( new Level() ) );
 			level = levels.nextLevel();
 		}
@@ -210,6 +209,10 @@ package com.giantrobotbee.LD4823
 
 			mouseX = pos.x;
 			mouseY = pos.y;
+			
+			if ( touch.phase == TouchPhase.ENDED ) {
+				player.fire();
+			}
 		}
 
 		private function onKeyDown(e:KeyboardEvent):void

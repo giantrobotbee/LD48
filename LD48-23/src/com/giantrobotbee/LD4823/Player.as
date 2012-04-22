@@ -2,6 +2,7 @@ package com.giantrobotbee.LD4823
 {
 	import starling.display.Image;
 	import starling.display.Sprite;
+	import starling.display.Stage;
 
 	public class Player extends Sprite
 	{
@@ -38,8 +39,18 @@ package com.giantrobotbee.LD4823
 			addChild(gun);
 			addChild(pilot);
 		}
-
-		public function get planet():Planet
+		
+		public function update():void
+		{
+			gun.update();
+		}
+		
+		public function fire():void
+		{
+			gun.fire();
+		}
+		
+		public function get planet():Planet 
 		{
 			return _planet;
 		}

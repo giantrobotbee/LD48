@@ -1,21 +1,22 @@
 package com.giantrobotbee.LD4823
 {
-	import flash.display.Sprite;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
+	
+	import starling.display.Sprite;
 
 	public class ObjectPool
 	{
 		protected var array:Array;
 		protected var defaultClass:Class;
 
-		public function ObjectPool( defaultType:String )
+		public function ObjectPool( defaultType:* )
 		{
 			defaultClass = getDefinitionByName( getQualifiedClassName( defaultType ) ) as Class;
 			array = [];
 		}
 
-		public function retrieve( type:String ):Sprite
+		public function retrieve( type:* ):Sprite
 		{
 			var toFind:Class = type ? getDefinitionByName( getQualifiedClassName( type ) ) as Class : defaultClass;
 			var toReturn:Sprite;

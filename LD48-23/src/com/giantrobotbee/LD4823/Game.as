@@ -219,7 +219,7 @@ package com.giantrobotbee.LD4823
 			mouseY = pos.y;
 			
 			if ( touch.phase == TouchPhase.ENDED ) {
-				player.fire( stage );
+				player.fire();
 			}
 		}
 

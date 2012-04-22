@@ -27,18 +27,24 @@ package com.giantrobotbee.LD4823
 			addChild(gunBody);
 		}
 		
-		public function fire( stage:Stage ):void
+		public function fire():void
 		{
 			var gr:GlobalResources = GlobalResources.instance;
 			var b:Bullet = op.retrieve( Bullet ) as Bullet;
 			var p:Point = gr.level.globalToLocal(localToGlobal(new Point(gunBody.x, gunBody.y)));
 			var player:Player = parent as Player;
+			var orientation:Number = -1;
 			
 			b.x = (p.x - gunBody.width * Math.cos(gunBody.rotation));
 			b.y = (p.y - gunBody.height * Math.sin(gunBody.rotation));
-			b.vx = Math.cos(gunBody.rotation) * -5;
-			b.vy = Math.sin(gunBody.rotation) * -5;
-			b.rotation = gunBody.rotation;
+			
+			if ( Math.floor(player.rotation) != 0 && Math.ceil(player.rotation) != 0) {
+				orientation = player.rotation / player.rotation;
+			}
+			
+			b.vx = Math.cos(gunBody.rotation) * (5 * orientation);
+			b.vy = Math.sin(gunBody.rotation) * (5 * orientation);
+			b.rotation = gunBody.rotation + player.rotation;
 			gr.level.addChild(b);
 			gr.addBullet(b);
 		}

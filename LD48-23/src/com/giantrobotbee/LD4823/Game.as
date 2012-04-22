@@ -2,11 +2,11 @@ package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.model.GlobalModel;
 	import com.giantrobotbee.LD4823.stategies.LevelStrategy;
-	
+
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
-	
+
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -28,7 +28,6 @@ package com.giantrobotbee.LD4823
 		private var dPressed:Boolean = false;
 		private var accelRate:Number = 0.1;
 		private var decelRate:Number = 0.05;
-		private var gr:GlobalResources;
 
 		protected const levels:Levels = new Levels();
 
@@ -82,10 +81,6 @@ package com.giantrobotbee.LD4823
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 			addChild(player);
-			
-			gr = GlobalResources.instance;
-			gr.level = level;
-			gr.stage = stage;
 		}
 
 		private function onEnterFrame(e:Event):void
@@ -244,9 +239,9 @@ package com.giantrobotbee.LD4823
 					asteroid.velocity.y *= -1;
 				}
 			}*/
-			
+
 			player.update();
-			gr.updateBullets();
+			GlobalModel.instance.updateBullets();
 		}
 
 		private function onTouch(e:TouchEvent):void
@@ -256,7 +251,7 @@ package com.giantrobotbee.LD4823
 
 			mouseX = pos.x;
 			mouseY = pos.y;
-			
+
 			if ( touch.phase == TouchPhase.ENDED ) {
 				player.fire();
 			}

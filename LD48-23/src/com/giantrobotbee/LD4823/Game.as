@@ -1,18 +1,18 @@
 package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.stategies.LevelStrategy;
-
-	import flash.events.MouseEvent;
+	
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
-
+	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	import starling.utils.deg2rad;
 	import starling.utils.rad2deg;
 
@@ -89,20 +89,22 @@ package com.giantrobotbee.LD4823
 			player.vx = (Math.cos(player.rotation) * player.accel) * -1;
 			player.vy = (Math.sin(player.rotation) * player.accel) * -1;
 
-//			if ( player.x + (player.width >> 1) < 0 ) {
-//				player.x = stage.stageWidth + (player.width >> 1);
-//			} else if ( player.x - (player.width >> 1) > stage.stageWidth ) {
-//				player.x = 0;
-//			}
-//
-//			if ( player.y + (player.height >> 1) < 0 ) {
-//				player.y = stage.stageHeight + (player.height >> 1);
-//			} else if ( player.y - (player.height >> 1) > stage.stageHeight) {
-//				player.y = 0;
-//			}
+			if ( player.x + (player.width >> 1) < 0 ) {
+				player.x = stage.stageWidth + (player.width >> 1);
+			} else if ( player.x - (player.width >> 1) > stage.stageWidth ) {
+				player.x = 0;
+			}
+
+			if ( player.y + (player.height >> 1) < 0 ) {
+				player.y = stage.stageHeight + (player.height >> 1);
+			} else if ( player.y - (player.height >> 1) > stage.stageHeight) {
+				player.y = 0;
+			}
 
 			player.x += player.vx;
 			player.y += player.vy;
+			
+			player.update();
 		}
 
 		private function onTouch(e:TouchEvent):void
@@ -112,6 +114,10 @@ package com.giantrobotbee.LD4823
 
 			mouseX = pos.x;
 			mouseY = pos.y;
+			
+			if ( touch.phase == TouchPhase.ENDED ) {
+				player.fire();
+			}
 		}
 
 		private function onKeyDown(e:KeyboardEvent):void

@@ -29,13 +29,16 @@ package com.giantrobotbee.LD4823
 			addChild(gunBody);
 		}
 		
-		public function fire():void
+		public function fire( stage:Stage ):void
 		{
 			var b:Bullet = op.retrieve( Bullet ) as Bullet;
+			var p:Point = parent.localToGlobal(new Point(x, y));
 			
+			b.x = p.x;
+			b.y = p.y;
 			b.vx = -2;
 			b.vy = -2;
-			addChild(b);
+			stage.addChild(b);
 			liveBullets.push(b);
 		}
 		

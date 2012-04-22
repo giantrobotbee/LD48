@@ -45,9 +45,9 @@ package com.giantrobotbee.LD4823
 			gun.update();
 		}
 		
-		public function fire():void
+		public function fire( stage:Stage ):void
 		{
-			gun.fire();
+			gun.fire( stage );
 		}
 		
 		public function get planet():Planet 

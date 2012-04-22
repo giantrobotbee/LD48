@@ -200,6 +200,8 @@ package com.giantrobotbee.LD4823
 					movementFlagY = 0;
 				}
 			}
+			
+			player.update();
 		}
 
 		private function onTouch(e:TouchEvent):void
@@ -211,7 +213,7 @@ package com.giantrobotbee.LD4823
 			mouseY = pos.y;
 			
 			if ( touch.phase == TouchPhase.ENDED ) {
-				player.fire();
+				player.fire( stage );
 			}
 		}
 

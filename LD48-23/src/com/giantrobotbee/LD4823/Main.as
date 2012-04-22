@@ -1,5 +1,7 @@
 package com.giantrobotbee.LD4823
 {
+	import com.giantrobotbee.LD4823.model.GlobalModel;
+
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -22,6 +24,9 @@ package com.giantrobotbee.LD4823
 			stage.align = StageAlign.TOP_LEFT;
 
 			mStarling = new Starling(Game, stage);
+
+			GlobalModel.instance.stage = mStarling.stage;
+
 			mStarling.antiAliasing = 2;
 			mStarling.start();
 		}

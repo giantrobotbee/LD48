@@ -1,11 +1,12 @@
 package com.giantrobotbee.LD4823
 {
+	import com.giantrobotbee.LD4823.model.GlobalModel;
 	import com.giantrobotbee.LD4823.stategies.LevelStrategy;
-	
+
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
-	
+
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -27,7 +28,6 @@ package com.giantrobotbee.LD4823
 		private var dPressed:Boolean = false;
 		private var accelRate:Number = 0.1;
 		private var decelRate:Number = 0.05;
-		private var gr:GlobalResources;
 
 		protected const levels:Levels = new Levels();
 
@@ -40,18 +40,36 @@ package com.giantrobotbee.LD4823
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAdded);
 			addEventListener(Event.ENTER_FRAME, onEnterFrame);
+
 			initGame();
 		}
 
 		private function initGame():void
 		{
-			player = new Player();
+			GlobalModel.instance.player = player = new Player();
+
 			levels.addLevelStrategy( new LevelStrategy( new Level() ) );
-			level = levels.nextLevel();
+			GlobalModel.instance.level = level = levels.nextLevel();
+
+			var a:Asteroid;
+			var halfWidth:Number;
+			var halfHeight:Number;
+			for ( var i:int = 0, l:int = int(Math.random()*50); i < l; i++ ) {
+				a = new Asteroid();
+				halfWidth = a.width >> 1;
+				halfHeight = a.height >> 1;
+				a.x = Math.random() * (level.width - halfWidth) + halfWidth;
+				a.y = Math.random() * (level.height - halfHeight) + halfHeight;
+				a.flatten();
+				level.addChild( a );
+				GlobalModel.instance.asteroids.push( a );
+			}
 		}
 
 		private function onAdded(e:Event):void
 		{
+			level.width = level.image.width;
+			level.height = level.image.height;
 			level.x = stage.stageWidth - level.width >> 1;
 			level.y = stage.stageHeight - level.height >> 1;
 			addChild( level );
@@ -63,10 +81,6 @@ package com.giantrobotbee.LD4823
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 			addChild(player);
-			
-			gr = GlobalResources.instance;
-			gr.level = level;
-			gr.stage = stage;
 		}
 
 		private function onEnterFrame(e:Event):void
@@ -143,19 +157,26 @@ package com.giantrobotbee.LD4823
 				player.x += player.vx;
 				//	Ensure bounds are checked and reset if needed.
 				//	If reset, switch movement flag.
-				if ( player.x < playerBounds[0] ) {
-					player.x = playerBounds[0];
-					movementFlagX = 0;
+				if ( level.x == levelBounds[0] ) {
+					if ( player.x < playerBounds[0] ) {
+						player.x = playerBounds[0];
+					} else if ( player.x > playerBounds[1] ) {
+						player.x = playerBounds[1];
+						movementFlagX = 0;
+					}
 				} else if ( level.x == levelBounds[1] ) {
 					//	Special case if right edge is to be reached
 					//	Bounds check on exact right edge and middle of screen
 					//	If < middle of screen, reset and switch movement flag
 					if ( player.x > stage.stageWidth - halfPlayerWidth ) {
-	 	 				player.x = stage.stageWidth - halfPlayerWidth;
+						player.x = stage.stageWidth - halfPlayerWidth;
 					} else if ( player.x < playerBounds[1] ) {
 						player.x = playerBounds[1];
 						movementFlagX = 0;
 					}
+				} else if ( player.x < playerBounds[0] ) {
+					player.x = playerBounds[0];
+					movementFlagX = 0;
 				} else if ( player.x > playerBounds[1] ) {
 					player.x = playerBounds[1];
 					movementFlagX = 0;
@@ -205,9 +226,22 @@ package com.giantrobotbee.LD4823
 					movementFlagY = 0;
 				}
 			}
-			
+
+			//	Asteroid movement
+			/*var asteroid:Asteroid;
+			for ( var i:int = 0, l:int = GlobalModel.instance.asteroids.length; i < l; i++ ) {
+				asteroid = GlobalModel.instance.asteroids[i];
+				asteroid.update();
+				if ( asteroid.x > level.image.width - (asteroid.width >> 1) || asteroid.x < asteroid.width >> 1 ) {
+					asteroid.velocity.x *= -1;
+				}
+				if ( asteroid.y > level.image.height - (asteroid.height >> 1) || asteroid.y < asteroid.height >> 1 ) {
+					asteroid.velocity.y *= -1;
+				}
+			}*/
+
 			player.update();
-			gr.updateBullets();
+			GlobalModel.instance.updateBullets();
 		}
 
 		private function onTouch(e:TouchEvent):void
@@ -217,7 +251,7 @@ package com.giantrobotbee.LD4823
 
 			mouseX = pos.x;
 			mouseY = pos.y;
-			
+
 			if ( touch.phase == TouchPhase.ENDED ) {
 				player.fire();
 			}

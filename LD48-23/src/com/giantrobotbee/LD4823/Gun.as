@@ -1,7 +1,9 @@
 package com.giantrobotbee.LD4823
 {
+	import com.giantrobotbee.LD4823.model.GlobalModel;
+
 	import flash.geom.Point;
-	
+
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.display.Stage;
@@ -26,12 +28,11 @@ package com.giantrobotbee.LD4823
 			addChild(gunAnchor);
 			addChild(gunBody);
 		}
-		
+
 		public function fire():void
 		{
-			var gr:GlobalResources = GlobalResources.instance;
 			var b:Bullet = op.retrieve( Bullet ) as Bullet;
-			var p:Point = gr.level.globalToLocal(localToGlobal(new Point(gunBody.x, gunBody.y)));
+			var p:Point = GlobalModel.instance.level.globalToLocal(localToGlobal(new Point(gunBody.x, gunBody.y)));
 			var player:Player = parent as Player;
 			var orientation:Number = -1;
 			var cosGbRot:Number = Math.cos(gunBody.rotation);
@@ -47,10 +48,10 @@ package com.giantrobotbee.LD4823
 			b.vx = cosGbRot * orientation * 20;
 			b.vy = sinGbRot * orientation * 20;
 			b.rotation = gunBody.rotation + player.rotation;
-			gr.level.addChild(b);
-			gr.addBullet(b);
+			GlobalModel.instance.level.addChild(b);
+			GlobalModel.instance.addBullet(b);
 		}
-		
+
 		public function update():void
 		{
 		}

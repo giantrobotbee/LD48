@@ -25,6 +25,9 @@ package com.giantrobotbee.LD4823
 
 		[Embed(source="res/player-gun-basic-anchor.png")]
 		private static const GunAnchor:Class;
+		
+		[Embed(source="res/shotgun-bullet.png")]
+		private static const ShotgunBullet:Class;
 
 		protected static const textureCache:Dictionary = new Dictionary();
 		protected static const imageCache:Dictionary = new Dictionary();

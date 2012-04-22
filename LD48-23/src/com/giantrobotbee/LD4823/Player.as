@@ -110,7 +110,6 @@ package com.giantrobotbee.LD4823
 			_vy = vy;
 		}
 
-
 		public function get rotSpeed():Number
 		{
 			return _rotSpeed;

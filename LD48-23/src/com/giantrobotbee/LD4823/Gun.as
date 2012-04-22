@@ -11,14 +11,12 @@ package com.giantrobotbee.LD4823
 		private var _gunBody:Image;
 		private var _gunAnchor:Image;
 		private var op:ObjectPool;
-		private var liveBullets:Vector.<Bullet>;
 
 		public function Gun()
 		{
 			gunBody = Assets.retrieveImage( 'GunBody' );
 			gunAnchor = Assets.retrieveImage( 'GunAnchor' );
 			op = new ObjectPool( Bullet );
-			liveBullets = new Vector.<Bullet>;
 
 			gunBody.pivotX = gunBody.width - 7;
 			gunBody.pivotY = gunBody.height - 9;
@@ -31,25 +29,22 @@ package com.giantrobotbee.LD4823
 		
 		public function fire( stage:Stage ):void
 		{
+			var gr:GlobalResources = GlobalResources.instance;
 			var b:Bullet = op.retrieve( Bullet ) as Bullet;
-			var p:Point = parent.localToGlobal(new Point(x, y));
+			var p:Point = gr.level.globalToLocal(localToGlobal(new Point(gunBody.x, gunBody.y)));
+			var player:Player = parent as Player;
 			
-			b.x = p.x;
-			b.y = p.y;
-			b.vx = -2;
-			b.vy = -2;
-			stage.addChild(b);
-			liveBullets.push(b);
+			b.x = (p.x - gunBody.width * Math.cos(gunBody.rotation));
+			b.y = (p.y - gunBody.height * Math.sin(gunBody.rotation));
+			b.vx = Math.cos(gunBody.rotation) * -5;
+			b.vy = Math.sin(gunBody.rotation) * -5;
+			b.rotation = gunBody.rotation;
+			gr.level.addChild(b);
+			gr.addBullet(b);
 		}
 		
 		public function update():void
 		{
-			if ( liveBullets.length > 0 ) {
-				for ( var i:int = 0, l:int = liveBullets.length; i < l; i++ ) {
-					liveBullets[i].x += liveBullets[i].vx;
-					liveBullets[i].y += liveBullets[i].vy;
-				}
-			}
 		}
 
 		public function get gunBody():Image

@@ -1,18 +1,20 @@
 package com.giantrobotbee.LD4823
 {
+	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Sprite;
+	import starling.events.Event;
 	
 	public class Bullet extends Sprite
 	{
-		private var q:Quad;
+		private var _image:Image;
 		private var _vx:Number = 0;
 		private var _vy:Number = 0;
 		
 		public function Bullet()
 		{
-			q = new Quad(30, 15, 0xff0000);
-			addChild(q);
+			image = new Image(Assets.retrieveTexture( 'ShotgunBullet' ));
+			addChild(image);
 		}
 		
 		public function get vx():Number 
@@ -33,6 +35,16 @@ package com.giantrobotbee.LD4823
 		public function set vy(value:Number):void 
 		{
 			_vy = value;
+		}
+		
+		public function get image():Image 
+		{
+			return _image;
+		}
+		
+		public function set image(value:Image):void 
+		{
+			_image = value;
 		}
 	}
 }

@@ -5,7 +5,7 @@ package com.giantrobotbee.LD4823
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
-
+	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -27,6 +27,7 @@ package com.giantrobotbee.LD4823
 		private var dPressed:Boolean = false;
 		private var accelRate:Number = 0.1;
 		private var decelRate:Number = 0.05;
+		private var gr:GlobalResources;
 
 		protected const levels:Levels = new Levels();
 
@@ -62,6 +63,10 @@ package com.giantrobotbee.LD4823
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 			addChild(player);
+			
+			gr = GlobalResources.instance;
+			gr.level = level;
+			gr.stage = stage;
 		}
 
 		private function onEnterFrame(e:Event):void
@@ -202,6 +207,7 @@ package com.giantrobotbee.LD4823
 			}
 			
 			player.update();
+			gr.updateBullets();
 		}
 
 		private function onTouch(e:TouchEvent):void

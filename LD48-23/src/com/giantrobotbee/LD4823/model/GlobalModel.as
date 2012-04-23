@@ -19,7 +19,6 @@ package com.giantrobotbee.LD4823.model
 		public var projectileLayer:ProjectileLayer;
 		public var bullets:Vector.<Bullet>;
 		public var asteroids:Vector.<Asteroid>;
-		public var bulletLayer:Sprite;
 		public var debug:Boolean = true;
 
 		public function GlobalModel()

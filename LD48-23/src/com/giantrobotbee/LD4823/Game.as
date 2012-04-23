@@ -50,8 +50,6 @@ package com.giantrobotbee.LD4823
 
 			levels.addLevelStrategy( new LevelStrategy( new Level() ) );
 			GlobalModel.instance.level = level = levels.nextLevel();
-			
-			GlobalModel.instance.bulletLayer = new Sprite();
 
 			var a:Asteroid;
 			var halfWidth:Number;

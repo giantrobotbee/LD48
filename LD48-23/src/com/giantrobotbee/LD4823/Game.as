@@ -2,7 +2,8 @@ package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.model.GlobalModel;
 	import com.giantrobotbee.LD4823.stategies.LevelStrategy;
-	
+	import com.giantrobotbee.LD4823.utils.MathUtil;
+
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
@@ -255,10 +256,10 @@ package com.giantrobotbee.LD4823
 				asteroid = GlobalModel.instance.asteroids[i];
 				asteroid.update();
 				if ( asteroid.x > level.image.width - (asteroid.width >> 1) || asteroid.x < asteroid.width >> 1 ) {
-					asteroid.velocity.x *= -1;
+					asteroid.velocity.x = MathUtil.randomRange(-5,5);
 				}
 				if ( asteroid.y > level.image.height - (asteroid.height >> 1) || asteroid.y < asteroid.height >> 1 ) {
-					asteroid.velocity.y *= -1;
+					asteroid.velocity.y = MathUtil.randomRange(-5,5);
 				}
 			}
 

@@ -38,6 +38,25 @@ package com.giantrobotbee.LD4823
 		[Embed(source="res/shotgun-bullet.png")]
 		private static const ShotgunBullet:Class;
 
+		[Embed(source="res/asteroid1.png")]
+		private static const Asteroid1:Class;
+		[Embed(source="res/asteroid2.png")]
+		private static const Asteroid2:Class;
+		[Embed(source="res/asteroid3.png")]
+		private static const Asteroid3:Class;
+		[Embed(source="res/asteroid4.png")]
+		private static const Asteroid4:Class;
+		[Embed(source="res/asteroid5.png")]
+		private static const Asteroid5:Class;
+		[Embed(source="res/asteroid6.png")]
+		private static const Asteroid6:Class;
+		[Embed(source="res/asteroid7.png")]
+		private static const Asteroid7:Class;
+		[Embed(source="res/asteroid8.png")]
+		private static const Asteroid8:Class;
+
+		public static const asteroids:Dictionary = new Dictionary();
+
 		[Embed(source="res/defense-hub.png")]
 		private static const DefenseHub:Class;
 		
@@ -46,6 +65,12 @@ package com.giantrobotbee.LD4823
 
 		public function Assets()
 		{
+		}
+
+		public static function retrieveAsteroid( value:int ):Image
+		{
+			value = value > 8 ? 8 : value < 1 ? 1 : value;
+			return new Image( Assets.retrieveTexture( 'Asteroid'+value ) );
 		}
 
 		public static function retrieveTexture( name:String ):Texture

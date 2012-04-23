@@ -4,7 +4,7 @@ package com.giantrobotbee.LD4823.model
 	import com.giantrobotbee.LD4823.Bullet;
 	import com.giantrobotbee.LD4823.Level;
 	import com.giantrobotbee.LD4823.Player;
-
+	
 	import starling.display.Sprite;
 	import starling.display.Stage;
 
@@ -17,6 +17,8 @@ package com.giantrobotbee.LD4823.model
 		public var player:Player;
 		public var bullets:Vector.<Bullet>;
 		public var asteroids:Vector.<Asteroid>;
+		public var bulletLayer:Sprite;
+		public var debug:Boolean = true;
 
 		public function GlobalModel()
 		{

@@ -2,11 +2,11 @@ package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.model.GlobalModel;
 	import com.giantrobotbee.LD4823.stategies.LevelStrategy;
-
+	
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
-
+	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -50,6 +50,8 @@ package com.giantrobotbee.LD4823
 
 			levels.addLevelStrategy( new LevelStrategy( new Level() ) );
 			GlobalModel.instance.level = level = levels.nextLevel();
+			
+			GlobalModel.instance.bulletLayer = new Sprite();
 
 			var a:Asteroid;
 			var halfWidth:Number;
@@ -68,10 +70,10 @@ package com.giantrobotbee.LD4823
 
 		private function onAdded(e:Event):void
 		{
-			level.width = level.image.width;
-			level.height = level.image.height;
-			level.x = stage.stageWidth - level.width >> 1;
-			level.y = stage.stageHeight - level.height >> 1;
+			GlobalModel.instance.bulletLayer.width = level.width = level.image.width;
+			GlobalModel.instance.bulletLayer.height = level.height = level.image.height;
+			GlobalModel.instance.bulletLayer.x = level.x = stage.stageWidth - level.width >> 1;
+			GlobalModel.instance.bulletLayer.y = level.y = stage.stageHeight - level.height >> 1;
 			addChild( level );
 
 			player.x = stage.stageWidth - player.width >> 1;
@@ -81,6 +83,8 @@ package com.giantrobotbee.LD4823
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 			addChild(player);
+			addChild(GlobalModel.instance.bulletLayer);
+			
 		}
 
 		private function onEnterFrame(e:Event):void
@@ -271,6 +275,11 @@ package com.giantrobotbee.LD4823
 					break;
 				case Keyboard.D:
 					dPressed = true;
+					break;
+				case Keyboard.SPACE:
+					if ( GlobalModel.instance.debug ) {
+						player.fire();
+					}
 					break;
 			}
 		}

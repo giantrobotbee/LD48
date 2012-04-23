@@ -15,6 +15,8 @@ package com.giantrobotbee.LD4823
 		{
 			image = new Image(Assets.retrieveTexture( 'ShotgunBullet' ));
 			addChild(image);
+			this.pivotX = this.width >> 1;
+			this.pivotY = this.height >> 1;
 		}
 		
 		public function get vx():Number 

@@ -1,22 +1,21 @@
 package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.model.GlobalModel;
-
+	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
-
+	
 	import starling.core.Starling;
 
 	[SWF(width="1024", height="768", frameRate="60", backgroundColor="#000000")]
 	public class Main extends Sprite
 	{
 		private var mStarling:Starling;
-		private var debug:Boolean = true;
 
 		public function Main()
 		{
-			if (debug == true) {
+			if (GlobalModel.instance.debug == true) {
 				addChild(new Stats());
 			}
 

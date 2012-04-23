@@ -1,12 +1,13 @@
 package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.model.GlobalModel;
-
+	
 	import flash.geom.Point;
-
+	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.display.Stage;
+	import starling.utils.rad2deg;
 
 	public class Gun extends Sprite
 	{
@@ -32,23 +33,16 @@ package com.giantrobotbee.LD4823
 		public function fire():void
 		{
 			var b:Bullet = op.retrieve( Bullet ) as Bullet;
-			var p:Point = GlobalModel.instance.level.globalToLocal(localToGlobal(new Point(gunBody.x, gunBody.y)));
+			var p:Point = GlobalModel.instance.bulletLayer.globalToLocal(localToGlobal(new Point(gunBody.x, gunBody.y)));
 			var player:Player = parent as Player;
-			var orientation:Number = -1;
-			var cosGbRot:Number = Math.cos(gunBody.rotation);
-			var sinGbRot:Number = Math.sin(gunBody.rotation);
 			
-			b.x = (p.x - gunBody.width * cosGbRot);
-			b.y = (p.y - gunBody.height * sinGbRot);
+			b.x = p.x;
+			b.y = p.y;
 			
-			if ( Math.round(player.rotation) != 0) {
-				orientation = player.rotation / player.rotation;
-			}
-			
-			b.vx = cosGbRot * orientation * 20;
-			b.vy = sinGbRot * orientation * 20;
+			b.vx = Math.cos(gunBody.rotation + player.rotation) * 10 * -1;
+			b.vy = Math.sin(gunBody.rotation + player.rotation) * 10 * -1;
 			b.rotation = gunBody.rotation + player.rotation;
-			GlobalModel.instance.level.addChild(b);
+			GlobalModel.instance.bulletLayer.addChild(b);
 			GlobalModel.instance.addBullet(b);
 		}
 

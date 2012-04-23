@@ -39,8 +39,8 @@ package com.giantrobotbee.LD4823
 			b.x = p.x - gunBody.width * Math.cos(gunBody.rotation + player.rotation);
 			b.y = p.y - gunBody.height * Math.sin(gunBody.rotation + player.rotation);
 			
-			b.vx = Math.cos(gunBody.rotation + player.rotation) * 10 * -1;
-			b.vy = Math.sin(gunBody.rotation + player.rotation) * 10 * -1;
+			b.vx = Math.cos(gunBody.rotation + player.rotation) * 20 * -1;
+			b.vy = Math.sin(gunBody.rotation + player.rotation) * 20 * -1;
 			b.rotation = gunBody.rotation + player.rotation;
 			GlobalModel.instance.projectileLayer.addChild(b);
 			GlobalModel.instance.addBullet(b);

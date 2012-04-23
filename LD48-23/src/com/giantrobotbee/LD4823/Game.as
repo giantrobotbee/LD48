@@ -61,7 +61,7 @@ package com.giantrobotbee.LD4823
 				a.x = Math.random() * (level.width - halfWidth) + halfWidth;
 				a.y = Math.random() * (level.height - halfHeight) + halfHeight;
 				a.flatten();
-				level.addChild( a );
+				GlobalModel.instance.projectileLayer.addChild( a );
 				GlobalModel.instance.asteroids.push( a );
 			}
 		}

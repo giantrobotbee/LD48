@@ -263,7 +263,6 @@ package com.giantrobotbee.LD4823
 			}
 
 			player.update();
-			GlobalModel.instance.updateBullets();
 		}
 
 		private function onTouch(e:TouchEvent):void

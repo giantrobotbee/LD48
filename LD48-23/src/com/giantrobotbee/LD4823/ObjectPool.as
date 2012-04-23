@@ -38,7 +38,7 @@ package com.giantrobotbee.LD4823
 			return toReturn;
 		}
 
-		public function dispose( object:Sprite ):void
+		public function add( object:Sprite ):void
 		{
 			array.push( object );
 		}

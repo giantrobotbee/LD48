@@ -35,15 +35,5 @@ package com.giantrobotbee.LD4823.model
 		{
 			bullets.push( bullet );
 		}
-
-		public function updateBullets():void
-		{
-			if ( bullets.length > 0 ) {
-				for ( var i:int = 0, l:int = bullets.length; i < l; i++ ) {
-					bullets[i].x += bullets[i].vx;
-					bullets[i].y += bullets[i].vy;
-				}
-			}
-		}
 	}
 }

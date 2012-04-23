@@ -33,7 +33,7 @@ package com.giantrobotbee.LD4823
 		public function fire():void
 		{
 			var b:Bullet = op.retrieve( Bullet ) as Bullet;
-			var p:Point = GlobalModel.instance.bulletLayer.globalToLocal(localToGlobal(new Point(gunBody.x, gunBody.y)));
+			var p:Point = GlobalModel.instance.projectileLayer.globalToLocal(localToGlobal(new Point(gunBody.x, gunBody.y)));
 			var player:Player = parent as Player;
 			
 			b.x = p.x;
@@ -42,7 +42,7 @@ package com.giantrobotbee.LD4823
 			b.vx = Math.cos(gunBody.rotation + player.rotation) * 10 * -1;
 			b.vy = Math.sin(gunBody.rotation + player.rotation) * 10 * -1;
 			b.rotation = gunBody.rotation + player.rotation;
-			GlobalModel.instance.bulletLayer.addChild(b);
+			GlobalModel.instance.projectileLayer.addChild(b);
 			GlobalModel.instance.addBullet(b);
 		}
 

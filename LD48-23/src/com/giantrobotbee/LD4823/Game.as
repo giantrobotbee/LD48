@@ -70,10 +70,10 @@ package com.giantrobotbee.LD4823
 
 		private function onAdded(e:Event):void
 		{
-			GlobalModel.instance.bulletLayer.width = level.width = level.image.width;
-			GlobalModel.instance.bulletLayer.height = level.height = level.image.height;
-			GlobalModel.instance.bulletLayer.x = level.x = stage.stageWidth - level.width >> 1;
-			GlobalModel.instance.bulletLayer.y = level.y = stage.stageHeight - level.height >> 1;
+			level.width = level.image.width;
+			level.height = level.image.height;
+			level.x = stage.stageWidth - level.width >> 1;
+			level.y = stage.stageHeight - level.height >> 1;
 			addChild( level );
 
 			player.x = stage.stageWidth - player.width >> 1;
@@ -83,8 +83,26 @@ package com.giantrobotbee.LD4823
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 			addChild(player);
-			addChild(GlobalModel.instance.bulletLayer);
-			
+
+			GlobalModel.instance.projectileLayer.width = level.width;
+			GlobalModel.instance.projectileLayer.height = level.height;
+			GlobalModel.instance.projectileLayer.x = level.x;
+			GlobalModel.instance.projectileLayer.y = level.y;
+			addChild( GlobalModel.instance.projectileLayer );
+
+			var a:Asteroid;
+			var halfWidth:Number;
+			var halfHeight:Number;
+			for ( var i:int = 0, l:int = int(Math.random()*50); i < l; i++ ) {
+				a = new Asteroid();
+				halfWidth = a.width >> 1;
+				halfHeight = a.height >> 1;
+				a.x = Math.random() * (level.width - halfWidth) + halfWidth;
+				a.y = Math.random() * (level.height - halfHeight) + halfHeight;
+				a.flatten();
+				GlobalModel.instance.projectileLayer.addChild( a );
+				GlobalModel.instance.asteroids.push( a );
+			}
 		}
 
 		private function onEnterFrame(e:Event):void
@@ -156,6 +174,7 @@ package com.giantrobotbee.LD4823
 					level.x = levelBounds[1];
 					movementFlagX = 1;
 				}
+				GlobalModel.instance.projectileLayer.x = level.x;
 			} else {
 				//	Level is maxed out, move character
 				player.x += player.vx;
@@ -200,6 +219,7 @@ package com.giantrobotbee.LD4823
 					level.y = levelBounds[3];
 					movementFlagY = 1;
 				}
+				GlobalModel.instance.projectileLayer.y = level.y;
 			} else {
 				//	Level is maxed out, move character
 				player.y += player.vy;
@@ -232,7 +252,7 @@ package com.giantrobotbee.LD4823
 			}
 
 			//	Asteroid movement
-			/*var asteroid:Asteroid;
+			var asteroid:Asteroid;
 			for ( var i:int = 0, l:int = GlobalModel.instance.asteroids.length; i < l; i++ ) {
 				asteroid = GlobalModel.instance.asteroids[i];
 				asteroid.update();
@@ -242,7 +262,7 @@ package com.giantrobotbee.LD4823
 				if ( asteroid.y > level.image.height - (asteroid.height >> 1) || asteroid.y < asteroid.height >> 1 ) {
 					asteroid.velocity.y *= -1;
 				}
-			}*/
+			}
 
 			player.update();
 			GlobalModel.instance.updateBullets();

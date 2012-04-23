@@ -4,7 +4,8 @@ package com.giantrobotbee.LD4823.model
 	import com.giantrobotbee.LD4823.Bullet;
 	import com.giantrobotbee.LD4823.Level;
 	import com.giantrobotbee.LD4823.Player;
-	
+	import com.giantrobotbee.LD4823.ProjectileLayer;
+
 	import starling.display.Sprite;
 	import starling.display.Stage;
 
@@ -15,6 +16,7 @@ package com.giantrobotbee.LD4823.model
 		public var stage:Stage;
 		public var level:Level;
 		public var player:Player;
+		public var projectileLayer:ProjectileLayer;
 		public var bullets:Vector.<Bullet>;
 		public var asteroids:Vector.<Asteroid>;
 		public var bulletLayer:Sprite;
@@ -26,6 +28,7 @@ package com.giantrobotbee.LD4823.model
 			{
 				bullets = new Vector.<Bullet>();
 				asteroids = new Vector.<Asteroid>();
+				projectileLayer = new ProjectileLayer();
 			}
 		}
 

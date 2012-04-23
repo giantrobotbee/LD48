@@ -36,8 +36,8 @@ package com.giantrobotbee.LD4823
 			var p:Point = GlobalModel.instance.projectileLayer.globalToLocal(localToGlobal(new Point(gunBody.x, gunBody.y)));
 			var player:Player = parent as Player;
 			
-			b.x = p.x;
-			b.y = p.y;
+			b.x = p.x - gunBody.width * Math.cos(gunBody.rotation + player.rotation);
+			b.y = p.y - gunBody.height * Math.sin(gunBody.rotation + player.rotation);
 			
 			b.vx = Math.cos(gunBody.rotation + player.rotation) * 10 * -1;
 			b.vy = Math.sin(gunBody.rotation + player.rotation) * 10 * -1;

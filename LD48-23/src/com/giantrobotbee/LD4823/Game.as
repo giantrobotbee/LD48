@@ -7,7 +7,7 @@ package com.giantrobotbee.LD4823
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
-	
+
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -36,6 +36,8 @@ package com.giantrobotbee.LD4823
 
 		protected var movementFlagX:uint = 0;
 		protected var movementFlagY:uint = 0;
+
+		protected var quad:Quad;
 
 		public function Game()
 		{
@@ -251,14 +253,14 @@ package com.giantrobotbee.LD4823
 			}
 
 			player.update();
-			GlobalModel.instance.updateBullets();
 
 			//	Asteroid movement
 			var asteroid:Asteroid;
 			var bullet:Bullet;
 			var asteroidPoint:Point = new Point(0,0);
 			var bulletPoint:Point = new Point(0,0);
-			var playerPoint:Point = GlobalModel.instance.projectileLayer.globalToLocal( localToGlobal( new Point( player.x, player.y ) ) );
+			var playerPoint:Point = GlobalModel.instance.projectileLayer.globalToLocal( player.localToGlobal( new Point( player.planet.x, player.planet.y ) ) );
+
 			for ( var i:int = GlobalModel.instance.asteroids.length-1; i > -1; i-- ) {
 				asteroid = GlobalModel.instance.asteroids[i];
 				asteroidPoint.x = asteroid.x;
@@ -281,7 +283,11 @@ package com.giantrobotbee.LD4823
 						GlobalModel.instance.asteroids.splice( i, 1 );
 						GlobalModel.instance.bullets.splice( j, 1 );
 					}
-					//	Player hit testing
+				}
+
+				if ( asteroid.bitmap.bitmapData.hitTest( asteroidPoint, 255, player.planet.bitmap.bitmapData, playerPoint, 255 ) ) {
+					asteroid.parent.removeChild( asteroid );
+					GlobalModel.instance.asteroids.splice( i, 1 );
 				}
 			}
 		}

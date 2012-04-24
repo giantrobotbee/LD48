@@ -6,8 +6,6 @@ package com.giantrobotbee.LD4823
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 
-	import skyboy.CollisionDetection.PixelPerfect;
-
 	import starling.core.Starling;
 
 	[SWF(width="1024", height="768", frameRate="60", backgroundColor="#000000")]
@@ -27,7 +25,7 @@ package com.giantrobotbee.LD4823
 			mStarling = new Starling(Game, stage);
 
 			GlobalModel.instance.stage = mStarling.stage;
-			
+
 			trace("scale factor: ", mStarling.contentScaleFactor);
 
 			mStarling.antiAliasing = 2;

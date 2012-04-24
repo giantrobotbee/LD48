@@ -18,34 +18,31 @@ package com.giantrobotbee.LD4823
 
 		public function Pilot()
 		{
-			_bitmap = Assets.retrieveBitmap( 'Pilot' );
-			image = Assets.retrieveImage( 'Pilot', _bitmap );
-			addChild(image);
 			body = Assets.retrieveImage( 'PilotBody' );
 			_armNormal = Assets.retrieveImage( 'PilotArmNormal' );
 			_armAccel = Assets.retrieveImage( 'PilotArmAccel' );
 			_armBrake = Assets.retrieveImage( 'PilotArmBrake' );
 			face = Assets.retrieveImage( 'PilotFaceNormal' );
-			
+
 			_armAccel.x = _armBrake.x = _armNormal.x = 9;
 			_armAccel.y = _armBrake.y = _armNormal.y = 14;
-			
+
 			face.x = 10;
 			face.y = 6;
-			
+
 			addChild(body);
 			_currentArm = _armNormal;
 			addChild(_currentArm);
 			addChild(face);
 		}
-		
+
 		public function accelerate():void
 		{
 			_currentArm.parent.removeChild(_currentArm);
 			_currentArm = _armAccel;
 			addChild(_currentArm);
 		}
-		
+
 		public function normalize():void
 		{
 		}
@@ -69,7 +66,7 @@ package com.giantrobotbee.LD4823
 		{
 			_bitmap = value;
 		}
-		
+
 		public function get face():Image
 		{
 			return _face;

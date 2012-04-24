@@ -1,10 +1,14 @@
 package com.giantrobotbee.LD4823
 {
+	import flash.display.Bitmap;
+
 	import starling.display.Image;
 	import starling.display.Sprite;
-	
+
 	public class Pilot extends Sprite
 	{
+		private var _image:Image;
+		protected var _bitmap:Bitmap;
 		private var _body:Image;
 		private var _armNormal:Image;
 		private var _armAccel:Image;
@@ -19,24 +23,24 @@ package com.giantrobotbee.LD4823
 			_armAccel = Assets.retrieveImage( 'PilotArmAccel' );
 			_armBrake = Assets.retrieveImage( 'PilotArmBrake' );
 			face = Assets.retrieveImage( 'PilotFaceNormal' );
-			
+
 			_armAccel.x = _armBrake.x = _armNormal.x = 9;
 			_armAccel.y = _armBrake.y = _armNormal.y = 14;
-			
+
 			face.x = 10;
 			face.y = 6;
-			
+
 			addChild(body);
 			_currentArm = _armNormal;
 			addChild(_currentArm);
 			addChild(face);
 		}
-		
+
 		public function accelerate():void
 		{
 			changeArm( _armAccel );
 		}
-		
+
 		public function normalize():void
 		{
 			changeArm( _armNormal );
@@ -56,7 +60,17 @@ package com.giantrobotbee.LD4823
 		{
 			_body = value;
 		}
-		
+
+		public function get bitmap():Bitmap
+		{
+			return _bitmap;
+		}
+
+		public function set bitmap(value:Bitmap):void
+		{
+			_bitmap = value;
+		}
+
 		public function get face():Image
 		{
 			return _face;

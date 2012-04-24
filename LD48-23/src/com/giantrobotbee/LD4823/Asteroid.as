@@ -2,6 +2,7 @@ package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.utils.MathUtil;
 
+	import flash.display.Bitmap;
 	import flash.geom.Point;
 
 	import starling.display.Image;
@@ -12,19 +13,18 @@ package com.giantrobotbee.LD4823
 	{
 		//	TODO: Get asset for & use in the future
 		protected var _image:Image;
-
-		//	TODO: Remove once image is implemented
-		protected var _quad:Quad;
+		protected var _bitmap:Bitmap;
 
 		protected var _vel:Point;
 
 		public function Asteroid()
 		{
 			super();
-			_quad = new Quad( 50, 50, 0xff0000, true );
-			_quad.x = -(_quad.width >> 1);
-			_quad.y = -(_quad.height >> 1);
-			addChild( _quad );
+			var rnd:int = MathUtil.randomInt( 7 ) + 1;
+			_bitmap = Assets.retrieveBitmap( 'Asteroid'+rnd );
+			_image = Assets.retrieveAsteroidFromBitmap( rnd, _bitmap );
+			_image.scaleX = _image.scaleY = Math.random() * 0.9 + 0.1;
+			addChild( _image );
 
 			_vel = new Point( MathUtil.randomRange(-5, 5), MathUtil.randomRange(-5, 5) );
 		}
@@ -42,6 +42,24 @@ package com.giantrobotbee.LD4823
 		public function get velocity():Point
 		{
 			return _vel;
+		}
+
+		public function get image():Image
+		{
+			return _image;
+		}
+		public function set image( value:Image ):void
+		{
+			_image = value;
+		}
+
+		public function get bitmap():Bitmap
+		{
+			return _bitmap;
+		}
+		public function set bitmap( value:Bitmap ):void
+		{
+			_bitmap = value;
 		}
 	}
 }

@@ -2,11 +2,12 @@ package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.model.GlobalModel;
 	import com.giantrobotbee.LD4823.stategies.LevelStrategy;
-	
+	import com.giantrobotbee.LD4823.utils.MathUtil;
+
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
-	
+
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -35,6 +36,8 @@ package com.giantrobotbee.LD4823
 
 		protected var movementFlagX:uint = 0;
 		protected var movementFlagY:uint = 0;
+
+		protected var quad:Quad;
 
 		public function Game()
 		{
@@ -249,20 +252,44 @@ package com.giantrobotbee.LD4823
 				}
 			}
 
+			player.update();
+
 			//	Asteroid movement
 			var asteroid:Asteroid;
-			for ( var i:int = 0, l:int = GlobalModel.instance.asteroids.length; i < l; i++ ) {
+			var bullet:Bullet;
+			var asteroidPoint:Point = new Point(0,0);
+			var bulletPoint:Point = new Point(0,0);
+			var playerPoint:Point = GlobalModel.instance.projectileLayer.globalToLocal( player.localToGlobal( new Point( player.planet.x, player.planet.y ) ) );
+
+			for ( var i:int = GlobalModel.instance.asteroids.length-1; i > -1; i-- ) {
 				asteroid = GlobalModel.instance.asteroids[i];
+				asteroidPoint.x = asteroid.x;
+				asteroidPoint.y = asteroid.y;
 				asteroid.update();
 				if ( asteroid.x > level.image.width - (asteroid.width >> 1) || asteroid.x < asteroid.width >> 1 ) {
-					asteroid.velocity.x *= -1;
+					asteroid.velocity.x = MathUtil.randomRange(-5,5);
 				}
 				if ( asteroid.y > level.image.height - (asteroid.height >> 1) || asteroid.y < asteroid.height >> 1 ) {
-					asteroid.velocity.y *= -1;
+					asteroid.velocity.y = MathUtil.randomRange(-5,5);
+				}
+
+				for ( var j:int = GlobalModel.instance.bullets.length-1; j > -1; j-- ) {
+					bullet = GlobalModel.instance.bullets[j];
+					bulletPoint.x = bullet.x;
+					bulletPoint.y = bullet.y;
+					if ( asteroid.bitmap.bitmapData.hitTest( asteroidPoint, 255, bullet.bitmap.bitmapData, bulletPoint, 255 ) ) {
+						bullet.parent.removeChild( bullet );
+						asteroid.parent.removeChild( asteroid );
+						GlobalModel.instance.asteroids.splice( i, 1 );
+						GlobalModel.instance.bullets.splice( j, 1 );
+					}
+				}
+
+				if ( asteroid.bitmap.bitmapData.hitTest( asteroidPoint, 255, player.planet.bitmap.bitmapData, playerPoint, 255 ) ) {
+					asteroid.parent.removeChild( asteroid );
+					GlobalModel.instance.asteroids.splice( i, 1 );
 				}
 			}
-
-			player.update();
 		}
 
 		private function onTouch(e:TouchEvent):void

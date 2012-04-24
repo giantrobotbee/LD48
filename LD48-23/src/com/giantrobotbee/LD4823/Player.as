@@ -10,6 +10,7 @@ package com.giantrobotbee.LD4823
 		private var _planet:Planet;
 		private var _thruster:Thruster;
 		private var _pilot:Pilot;
+		private var _hub:Image;
 		private var _gun:Gun;
 		private var _vx:Number = 0;
 		private var _vy:Number = 0;
@@ -24,7 +25,7 @@ package com.giantrobotbee.LD4823
 			thruster = new Thruster();
 			pilot = new Pilot();
 			gun = new Gun();
-			var hub:Image = Assets.retrieveImage( 'DefenseHub' );
+			_hub = Assets.retrieveImage( 'DefenseHub' );
 
 			thruster.x = (planet.width >> 1) - 10;
 			thruster.y = 24;
@@ -34,9 +35,9 @@ package com.giantrobotbee.LD4823
 
 			gun.x = 22;
 			gun.y = 123;
-			
-			hub.x = 28;
-			hub.y = 23;
+
+			_hub.x = 28;
+			_hub.y = 23;
 
 			this.pivotX = planet.width >> 1;
 			this.pivotY = planet.height >> 1;
@@ -45,13 +46,13 @@ package com.giantrobotbee.LD4823
 			addChild(thruster);
 			addChild(gun);
 			addChild(pilot);
-			addChild(hub);
+			addChild(_hub);
 		}
-		
+
 		public function update():void
 		{
 			gun.update();
-			
+
 			if ( _accelerating ) {
 				pilot.accelerate();
 			} else if ( _braking ) {
@@ -60,17 +61,17 @@ package com.giantrobotbee.LD4823
 				pilot.normalize();
 			}
 		}
-		
+
 		public function fire():void
 		{
 			gun.fire();
 		}
-		
+
 		public function isAccelerating():void
 		{
 			_accelerating = true;
 		}
-		
+
 		public function isNotAccelerating():void
 		{
 			_accelerating = false;

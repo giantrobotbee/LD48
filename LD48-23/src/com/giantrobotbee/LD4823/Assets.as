@@ -44,32 +44,71 @@ package com.giantrobotbee.LD4823
 		[Embed(source="res/shotgun-bullet.png")]
 		private static const ShotgunBullet:Class;
 
+		[Embed(source="res/asteroid1.png")]
+		private static const Asteroid1:Class;
+		[Embed(source="res/asteroid2.png")]
+		private static const Asteroid2:Class;
+		[Embed(source="res/asteroid3.png")]
+		private static const Asteroid3:Class;
+		[Embed(source="res/asteroid4.png")]
+		private static const Asteroid4:Class;
+		[Embed(source="res/asteroid5.png")]
+		private static const Asteroid5:Class;
+		[Embed(source="res/asteroid6.png")]
+		private static const Asteroid6:Class;
+		[Embed(source="res/asteroid7.png")]
+		private static const Asteroid7:Class;
+		[Embed(source="res/asteroid8.png")]
+		private static const Asteroid8:Class;
+
+		public static const asteroids:Dictionary = new Dictionary();
+
 		[Embed(source="res/defense-hub.png")]
 		private static const DefenseHub:Class;
 		
 		protected static const textureCache:Dictionary = new Dictionary();
 		protected static const imageCache:Dictionary = new Dictionary();
+		protected static const bitmapCache:Dictionary = new Dictionary();
 
 		public function Assets()
 		{
 		}
 
-		public static function retrieveTexture( name:String ):Texture
+		public static function retrieveAsteroidFromBitmap( value:int, bitmap:Bitmap ):Image
 		{
-			if ( Assets[name] )
+			return new Image( Assets.retrieveTexture( 'Asteroid'+value, bitmap ) );
+		}
+
+		public static function retrieveBitmap( name:String ):Bitmap
+		{
+			if ( Assets[name ] )
+			{
+				if ( !bitmapCache[name] )
+				{
+					bitmapCache[name] = new Assets[name]() as Bitmap;
+				}
+				return new Bitmap( (bitmapCache[name] as Bitmap).bitmapData.clone() );
+			}
+			return null;
+		}
+
+		public static function retrieveTexture( name:String, bitmap:Bitmap = null ):Texture
+		{
+			var bmp:Bitmap = bitmap ? bitmap : Assets.retrieveBitmap( name );
+			if ( bmp )
 			{
 				if ( !textureCache[name] )
 				{
-					textureCache[name] = Texture.fromBitmap( new Assets[name]() as Bitmap );
+					textureCache[name] = Texture.fromBitmap( bmp );
 				}
 				return textureCache[name];
 			}
 			return null;
 		}
 
-		public static function retrieveImage( name:String ):Image
+		public static function retrieveImage( name:String, bitmap:Bitmap = null ):Image
 		{
-			var tex:Texture = Assets.retrieveTexture( name );
+			var tex:Texture = Assets.retrieveTexture( name, bitmap );
 			if ( tex )
 			{
 				if ( !imageCache[name] )

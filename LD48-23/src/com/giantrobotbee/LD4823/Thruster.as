@@ -12,10 +12,10 @@ package com.giantrobotbee.LD4823
 		public function Thruster()
 		{
 			image = Assets.retrieveImage( 'Thruster' );
-			_engineFrames.push(Assets.retrieveImage( 'EngineFrameOne' ));
-			_engineFrames.push(Assets.retrieveImage( 'EngineFrameTwo' ));
-			
-			addChild(_engineFrames[0]);
+//			_engineFrames.push(Assets.retrieveImage( 'EngineFrameOne' ));
+//			_engineFrames.push(Assets.retrieveImage( 'EngineFrameTwo' ));
+//			
+//			addChild(_engineFrames[0]);
 			addChild(image);
 		}
 		

@@ -7,11 +7,21 @@ package com.giantrobotbee.LD4823
 	{
 		private var _topSpeed:Number = 10;
 		private var _image:Image;
+		private var _engineFrames:Vector.<Image>;
 
 		public function Thruster()
 		{
 			image = Assets.retrieveImage( 'Thruster' );
+			_engineFrames.push(Assets.retrieveImage( 'EngineFrameOne' ));
+			_engineFrames.push(Assets.retrieveImage( 'EngineFrameTwo' ));
+			
+			addChild(_engineFrames[0]);
 			addChild(image);
+		}
+		
+		public function accelerate():void
+		{
+			
 		}
 
 		public function get image():Image

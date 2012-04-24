@@ -55,7 +55,7 @@ package com.giantrobotbee.LD4823
 			if ( _accelerating ) {
 				pilot.accelerate();
 			} else if ( _braking ) {
-				
+				pilot.brake();
 			} else {
 				pilot.normalize();
 			}
@@ -74,6 +74,16 @@ package com.giantrobotbee.LD4823
 		public function isNotAccelerating():void
 		{
 			_accelerating = false;
+		}
+		
+		public function isBraking():void
+		{
+			_braking = true;
+		}
+		
+		public function isNotBraking():void
+		{
+			_braking = false;
 		}
 		
 		public function get planet():Planet 

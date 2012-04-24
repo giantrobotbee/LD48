@@ -290,6 +290,7 @@ package com.giantrobotbee.LD4823
 					break;
 				case Keyboard.S:
 					sPressed = true;
+					player.isBraking();
 					break;
 				case Keyboard.D:
 					dPressed = true;
@@ -314,6 +315,7 @@ package com.giantrobotbee.LD4823
 					break;
 				case Keyboard.S:
 					sPressed = false;
+					player.isNotBraking();
 					break;
 				case Keyboard.D:
 					dPressed = false;

@@ -34,13 +34,17 @@ package com.giantrobotbee.LD4823
 		
 		public function accelerate():void
 		{
-			_currentArm.parent.removeChild(_currentArm);
-			_currentArm = _armAccel;
-			addChild(_currentArm);
+			changeArm( _armAccel );
 		}
 		
 		public function normalize():void
 		{
+			changeArm( _armNormal );
+		}
+		
+		public function brake():void
+		{
+			changeArm( _armBrake );
 		}
 
 		public function get body():Image
@@ -61,6 +65,13 @@ package com.giantrobotbee.LD4823
 		public function set face(value:Image):void
 		{
 			_face = value;
+		}
+		
+		private function changeArm( arm:Image ):void
+		{
+			_currentArm.parent.removeChild(_currentArm);
+			_currentArm = arm;
+			addChild(_currentArm);
 		}
 	}
 }

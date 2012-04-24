@@ -17,6 +17,12 @@ package com.giantrobotbee.LD4823
 		[Embed(source="res/player-thruster-basic.png")]
 		protected static const Thruster:Class;
 
+		[Embed(source="res/engine-frame-1.png")]
+		protected static const EngineFrameOne:Class;
+
+		[Embed(source="res/engine-frame-2.png")]
+		protected static const EngineFrameTwo:Class;
+
 		[Embed(source="res/max-body.png")]
 		protected static const PilotBody:Class;
 		
@@ -70,6 +76,7 @@ package com.giantrobotbee.LD4823
 				{
 					imageCache[name] = new Image( tex );
 				}
+				trace(name, ": ", imageCache[name]);
 				return imageCache[name];
 			}
 			return null;

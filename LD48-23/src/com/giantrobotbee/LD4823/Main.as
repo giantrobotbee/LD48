@@ -25,6 +25,8 @@ package com.giantrobotbee.LD4823
 			mStarling = new Starling(Game, stage);
 
 			GlobalModel.instance.stage = mStarling.stage;
+			
+			trace("scale factor: ", mStarling.contentScaleFactor);
 
 			mStarling.antiAliasing = 2;
 			mStarling.start();

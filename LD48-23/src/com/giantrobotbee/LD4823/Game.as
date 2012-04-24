@@ -283,6 +283,7 @@ package com.giantrobotbee.LD4823
 			switch(e.keyCode) {
 				case Keyboard.W:
 					wPressed = true;
+					player.isAccelerating();
 					break;
 				case Keyboard.A:
 					aPressed = true;
@@ -305,6 +306,7 @@ package com.giantrobotbee.LD4823
 		{
 			switch(e.keyCode) {
 				case Keyboard.W:
+					player.isNotAccelerating();
 					wPressed = false;
 					break;
 				case Keyboard.A:

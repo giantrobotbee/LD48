@@ -12,21 +12,16 @@ package com.giantrobotbee.LD4823
 	public class Gun extends Sprite
 	{
 		private var _gunBody:Image;
-		private var _gunAnchor:Image;
 		private var op:ObjectPool;
 
 		public function Gun()
 		{
 			gunBody = Assets.retrieveImage( 'GunBody' );
-			gunAnchor = Assets.retrieveImage( 'GunAnchor' );
 			op = new ObjectPool( Bullet );
 
 			gunBody.pivotX = gunBody.width - 7;
 			gunBody.pivotY = gunBody.height - 9;
-			gunBody.x = gunAnchor.width >> 1;
-			gunBody.y = gunAnchor.height >> 1;
 
-			addChild(gunAnchor);
 			addChild(gunBody);
 			
 			for ( var i:Number = 0; i < 500; i++) {
@@ -63,24 +58,24 @@ package com.giantrobotbee.LD4823
 			
 			if ( bullets.length > 0 ) {
 				for ( var i:int = 0, l:int = bullets.length; i < l; i++ ) {
-					if ( bullets[i].x < level.x - (bullets[i].width >> 1) || 
-					     bullets[i].x > level.width + (bullets[i].width >> 1) ||
-					     bullets[i].y < level.y - (bullets[i].height >> 1) ||
-					     bullets[i].y > level.height + (bullets[i].height >> 1))
-					{
-						trace("Recycled a bullet");
-						var bullet:Bullet;
+//					if ( bullets[i].x < level.x - (bullets[i].width >> 1) || 
+//					     bullets[i].x > level.width + (bullets[i].width >> 1) ||
+//					     bullets[i].y < level.y - (bullets[i].height >> 1) ||
+//					     bullets[i].y > level.height + (bullets[i].height >> 1))
+//					{
+//						trace("Recycled a bullet");
+//						var bullet:Bullet;
 //						if ( i == l ) {
 //							bullet = bullets.pop();
 //						} else {
-							bullet = bullets.splice(i, 1)[0];
+//							bullet = bullets.splice(i, 1)[0];
 //						}
 //						op.add(bullet);
 //						GlobalModel.instance.projectileLayer.removeChild(bullet);
-					} else {
+//					} else {
 						bullets[i].x += bullets[i].vx;
 						bullets[i].y += bullets[i].vy;
-					}
+//					}
 				}
 			}
 		}
@@ -93,16 +88,6 @@ package com.giantrobotbee.LD4823
 		public function set gunBody(value:Image):void
 		{
 			_gunBody = value;
-		}
-
-		public function get gunAnchor():Image
-		{
-			return _gunAnchor;
-		}
-
-		public function set gunAnchor(value:Image):void
-		{
-			_gunAnchor = value;
 		}
 	}
 }

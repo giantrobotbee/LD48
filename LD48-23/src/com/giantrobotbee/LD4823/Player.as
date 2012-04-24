@@ -1,6 +1,7 @@
 package com.giantrobotbee.LD4823
 {
 	import starling.display.Image;
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.display.Stage;
 
@@ -14,6 +15,8 @@ package com.giantrobotbee.LD4823
 		private var _vy:Number = 0;
 		private var _rotSpeed:Number = 0.05;
 		private var _accel:Number = 0;
+		private var _accelerating:Boolean = false;
+		private var _braking:Boolean = false;
 
 		public function Player()
 		{
@@ -21,15 +24,19 @@ package com.giantrobotbee.LD4823
 			thruster = new Thruster();
 			pilot = new Pilot();
 			gun = new Gun();
+			var hub:Image = Assets.retrieveImage( 'DefenseHub' );
 
 			thruster.x = (planet.width >> 1) - 10;
-			thruster.y = -13;
+			thruster.y = 24;
 
-			pilot.x = 30;
-			pilot.y = ((pilot.height >> 1) + 15) * -1;
+			pilot.x = 35;
+			pilot.y = 3;
 
-			gun.x = 19;
-			gun.y = 82;
+			gun.x = 22;
+			gun.y = 123;
+			
+			hub.x = 28;
+			hub.y = 23;
 
 			this.pivotX = planet.width >> 1;
 			this.pivotY = planet.height >> 1;
@@ -38,16 +45,35 @@ package com.giantrobotbee.LD4823
 			addChild(thruster);
 			addChild(gun);
 			addChild(pilot);
+			addChild(hub);
 		}
 		
 		public function update():void
 		{
 			gun.update();
+			
+			if ( _accelerating ) {
+				pilot.accelerate();
+			} else if ( _braking ) {
+				
+			} else {
+				pilot.normalize();
+			}
 		}
 		
 		public function fire():void
 		{
 			gun.fire();
+		}
+		
+		public function isAccelerating():void
+		{
+			_accelerating = true;
+		}
+		
+		public function isNotAccelerating():void
+		{
+			_accelerating = false;
 		}
 		
 		public function get planet():Planet 

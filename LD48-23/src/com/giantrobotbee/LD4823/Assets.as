@@ -11,24 +11,36 @@ package com.giantrobotbee.LD4823
 		[Embed(source="res/stars.jpg")]
 		protected static const Stars:Class;
 
-		[Embed(source="res/player-planet-blue.png")]
+		[Embed(source="res/max-planet.png")]
 		protected static const Planet:Class;
 
 		[Embed(source="res/player-thruster-basic.png")]
 		protected static const Thruster:Class;
 
-		[Embed(source="res/player-pilot-default.png")]
-		protected static const Pilot:Class;
+		[Embed(source="res/max-body.png")]
+		protected static const PilotBody:Class;
+		
+		[Embed(source="res/max-arm-normal.png")]
+		protected static const PilotArmNormal:Class;
 
-		[Embed(source="res/player-gun-basic-body.png")]
+		[Embed(source="res/max-arm-accel.png")]
+		protected static const PilotArmAccel:Class;
+
+		[Embed(source="res/max-arm-brake.png")]
+		protected static const PilotArmBrake:Class;
+		
+		[Embed(source="res/max-face-normal.png")]
+		protected static const PilotFaceNormal:Class;
+		
+		[Embed(source="res/max-shotgun.png")]
 		private static const GunBody:Class;
-
-		[Embed(source="res/player-gun-basic-anchor.png")]
-		private static const GunAnchor:Class;
 		
 		[Embed(source="res/shotgun-bullet.png")]
 		private static const ShotgunBullet:Class;
 
+		[Embed(source="res/defense-hub.png")]
+		private static const DefenseHub:Class;
+		
 		protected static const textureCache:Dictionary = new Dictionary();
 		protected static const imageCache:Dictionary = new Dictionary();
 

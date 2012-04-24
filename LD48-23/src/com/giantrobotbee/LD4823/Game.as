@@ -32,6 +32,8 @@ package com.giantrobotbee.LD4823
 
 		protected const levels:Levels = new Levels();
 
+		protected const title:Title = new Title();
+
 		protected var level:Level;
 
 		protected var movementFlagX:uint = 0;
@@ -53,56 +55,53 @@ package com.giantrobotbee.LD4823
 
 			levels.addLevelStrategy( new LevelStrategy( new Level() ) );
 			GlobalModel.instance.level = level = levels.nextLevel();
-
-			var a:Asteroid;
-			var halfWidth:Number;
-			var halfHeight:Number;
-			for ( var i:int = 0, l:int = int(Math.random()*50); i < l; i++ ) {
-				a = new Asteroid();
-				halfWidth = a.width >> 1;
-				halfHeight = a.height >> 1;
-				a.x = Math.random() * (level.width - halfWidth) + halfWidth;
-				a.y = Math.random() * (level.height - halfHeight) + halfHeight;
-				a.flatten();
-				GlobalModel.instance.projectileLayer.addChild( a );
-				GlobalModel.instance.asteroids.push( a );
-			}
 		}
 
 		private function onAdded(e:Event):void
 		{
-			level.width = level.image.width;
-			level.height = level.image.height;
-			level.x = stage.stageWidth - level.width >> 1;
-			level.y = stage.stageHeight - level.height >> 1;
-			addChild( level );
+			addChild( title );
+			stage.addEventListener( TouchEvent.TOUCH, firstTouch );
+		}
 
-			player.x = stage.stageWidth - player.width >> 1;
-			player.y = stage.stageHeight - player.height >> 1;
+		protected function firstTouch( e:TouchEvent ):void
+		{
+			if ( e.getTouch( stage ).phase === TouchPhase.ENDED ) {
+				removeChild( title );
+				stage.removeEventListener( TouchEvent.TOUCH, firstTouch );
 
-			stage.addEventListener(TouchEvent.TOUCH, onTouch);
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
-			stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
-			addChild(player);
+				level.width = level.image.width;
+				level.height = level.image.height;
+				level.x = stage.stageWidth - level.width >> 1;
+				level.y = stage.stageHeight - level.height >> 1;
+				addChild( level );
 
-			GlobalModel.instance.projectileLayer.width = level.width;
-			GlobalModel.instance.projectileLayer.height = level.height;
-			GlobalModel.instance.projectileLayer.x = level.x;
-			GlobalModel.instance.projectileLayer.y = level.y;
-			addChild( GlobalModel.instance.projectileLayer );
+				player.x = stage.stageWidth - player.width >> 1;
+				player.y = stage.stageHeight - player.height >> 1;
 
-			var a:Asteroid;
-			var halfWidth:Number;
-			var halfHeight:Number;
-			for ( var i:int = 0, l:int = int(Math.random()*50); i < l; i++ ) {
-				a = new Asteroid();
-				halfWidth = a.width >> 1;
-				halfHeight = a.height >> 1;
-				a.x = Math.random() * (level.width - halfWidth) + halfWidth;
-				a.y = Math.random() * (level.height - halfHeight) + halfHeight;
-				a.flatten();
-				GlobalModel.instance.projectileLayer.addChild( a );
-				GlobalModel.instance.asteroids.push( a );
+				stage.addEventListener(TouchEvent.TOUCH, onTouch);
+				stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+				stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
+				addChild(player);
+
+				GlobalModel.instance.projectileLayer.width = level.width;
+				GlobalModel.instance.projectileLayer.height = level.height;
+				GlobalModel.instance.projectileLayer.x = level.x;
+				GlobalModel.instance.projectileLayer.y = level.y;
+				addChild( GlobalModel.instance.projectileLayer );
+
+				var a:Asteroid;
+				var halfWidth:Number;
+				var halfHeight:Number;
+				for ( var i:int = 0, l:int = int(Math.random()*50); i < l; i++ ) {
+					a = new Asteroid();
+					halfWidth = a.width >> 1;
+					halfHeight = a.height >> 1;
+					a.x = Math.random() * (level.width - halfWidth) + halfWidth;
+					a.y = Math.random() * (level.height - halfHeight) + halfHeight;
+					a.flatten();
+					GlobalModel.instance.projectileLayer.addChild( a );
+					GlobalModel.instance.asteroids.push( a );
+				}
 			}
 		}
 

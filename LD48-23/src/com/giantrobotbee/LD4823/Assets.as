@@ -62,33 +62,47 @@ package com.giantrobotbee.LD4823
 		
 		protected static const textureCache:Dictionary = new Dictionary();
 		protected static const imageCache:Dictionary = new Dictionary();
+		protected static const bitmapCache:Dictionary = new Dictionary();
 
 		public function Assets()
 		{
 		}
 
-		public static function retrieveAsteroid( value:int ):Image
+		public static function retrieveAsteroidFromBitmap( value:int, bitmap:Bitmap ):Image
 		{
-			value = value > 8 ? 8 : value < 1 ? 1 : value;
-			return new Image( Assets.retrieveTexture( 'Asteroid'+value ) );
+			return new Image( Assets.retrieveTexture( 'Asteroid'+value, bitmap ) );
 		}
 
-		public static function retrieveTexture( name:String ):Texture
+		public static function retrieveBitmap( name:String ):Bitmap
 		{
-			if ( Assets[name] )
+			if ( Assets[name ] )
+			{
+				if ( !bitmapCache[name] )
+				{
+					bitmapCache[name] = new Assets[name]() as Bitmap;
+				}
+				return new Bitmap( (bitmapCache[name] as Bitmap).bitmapData.clone() );
+			}
+			return null;
+		}
+
+		public static function retrieveTexture( name:String, bitmap:Bitmap = null ):Texture
+		{
+			var bmp:Bitmap = bitmap ? bitmap : Assets.retrieveBitmap( name );
+			if ( bmp )
 			{
 				if ( !textureCache[name] )
 				{
-					textureCache[name] = Texture.fromBitmap( new Assets[name]() as Bitmap );
+					textureCache[name] = Texture.fromBitmap( bmp );
 				}
 				return textureCache[name];
 			}
 			return null;
 		}
 
-		public static function retrieveImage( name:String ):Image
+		public static function retrieveImage( name:String, bitmap:Bitmap = null ):Image
 		{
-			var tex:Texture = Assets.retrieveTexture( name );
+			var tex:Texture = Assets.retrieveTexture( name, bitmap );
 			if ( tex )
 			{
 				if ( !imageCache[name] )

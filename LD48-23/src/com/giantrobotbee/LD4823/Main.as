@@ -1,11 +1,13 @@
 package com.giantrobotbee.LD4823
 {
 	import com.giantrobotbee.LD4823.model.GlobalModel;
-	
+
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
-	
+
+	import skyboy.CollisionDetection.PixelPerfect;
+
 	import starling.core.Starling;
 
 	[SWF(width="1024", height="768", frameRate="60", backgroundColor="#000000")]

@@ -250,10 +250,19 @@ package com.giantrobotbee.LD4823
 				}
 			}
 
+			player.update();
+			GlobalModel.instance.updateBullets();
+
 			//	Asteroid movement
 			var asteroid:Asteroid;
-			for ( var i:int = 0, l:int = GlobalModel.instance.asteroids.length; i < l; i++ ) {
+			var bullet:Bullet;
+			var asteroidPoint:Point = new Point(0,0);
+			var bulletPoint:Point = new Point(0,0);
+			var playerPoint:Point = GlobalModel.instance.projectileLayer.globalToLocal( localToGlobal( new Point( player.x, player.y ) ) );
+			for ( var i:int = GlobalModel.instance.asteroids.length-1; i > -1; i-- ) {
 				asteroid = GlobalModel.instance.asteroids[i];
+				asteroidPoint.x = asteroid.x;
+				asteroidPoint.y = asteroid.y;
 				asteroid.update();
 				if ( asteroid.x > level.image.width - (asteroid.width >> 1) || asteroid.x < asteroid.width >> 1 ) {
 					asteroid.velocity.x = MathUtil.randomRange(-5,5);
@@ -261,9 +270,20 @@ package com.giantrobotbee.LD4823
 				if ( asteroid.y > level.image.height - (asteroid.height >> 1) || asteroid.y < asteroid.height >> 1 ) {
 					asteroid.velocity.y = MathUtil.randomRange(-5,5);
 				}
-			}
 
-			player.update();
+				for ( var j:int = GlobalModel.instance.bullets.length-1; j > -1; j-- ) {
+					bullet = GlobalModel.instance.bullets[j];
+					bulletPoint.x = bullet.x;
+					bulletPoint.y = bullet.y;
+					if ( asteroid.bitmap.bitmapData.hitTest( asteroidPoint, 255, bullet.bitmap.bitmapData, bulletPoint, 255 ) ) {
+						bullet.parent.removeChild( bullet );
+						asteroid.parent.removeChild( asteroid );
+						GlobalModel.instance.asteroids.splice( i, 1 );
+						GlobalModel.instance.bullets.splice( j, 1 );
+					}
+					//	Player hit testing
+				}
+			}
 		}
 
 		private function onTouch(e:TouchEvent):void

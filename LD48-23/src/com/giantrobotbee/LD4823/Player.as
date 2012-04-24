@@ -55,10 +55,13 @@ package com.giantrobotbee.LD4823
 
 			if ( _accelerating ) {
 				pilot.accelerate();
+				thruster.accelerate();
 			} else if ( _braking ) {
 				pilot.brake();
+				thruster.brake();
 			} else {
 				pilot.normalize();
+				thruster.brake();
 			}
 		}
 
